@@ -28,7 +28,7 @@ const Footer = () => {
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
 
-            <div className="flex justify-center gap-3 text-base text-gray-400 hover:text-white">
+            <div className="flex justify-center gap-3 text-base text-gray-400">
               <Link
                 href="/products"
                 className="hover:text-green-600 transition"
@@ -55,7 +55,7 @@ const Footer = () => {
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-3">Company</h3>
 
-            <div className="flex justify-center gap-3 text-base text-gray-400 hover:text-white">
+            <div className="flex justify-center gap-3 text-base text-gray-400">
               <Link href="/contact" className="hover:text-green-600 transition">
                 Contact Us
               </Link>
