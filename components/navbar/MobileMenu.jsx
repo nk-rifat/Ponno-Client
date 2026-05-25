@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaHeart, FaShoppingCart, FaBars, FaTimes, FaUser, FaSignOutAlt } from "react-icons/fa";
+import { FaBars, FaTimes, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { NavActions } from "./ShopActions";
 
 export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {

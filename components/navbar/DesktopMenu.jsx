@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import {
-  FaHeart,
-  FaShoppingCart,
   FaUser,
   FaSignOutAlt,
   FaCog,
