@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
 
 export default function SiteLayout({ children }) {
@@ -8,10 +9,11 @@ export default function SiteLayout({ children }) {
 
       {/* Page Content Wrapper */}
       <div className="pt-24 min-h-screen bg-white">
-        <main className="max-w-7xl mx-auto">
-          {children}
-        </main>
+        <main className="max-w-7xl mx-auto">{children}</main>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </>
   );
 }

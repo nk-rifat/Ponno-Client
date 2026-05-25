@@ -16,7 +16,7 @@ export const Logo = () => {
         width={180}
         height={60}
         priority
-        className="h-10 sm:h-10 md:h-12 w-auto mt-2"
+        className="h-10 sm:h-10 md:h-12 w-auto mt-1"
       />
 
       <span className="sr-only">Ponno</span>
