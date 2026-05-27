@@ -8,7 +8,7 @@ const RegisterPage = () => {
       {/* Left Side */}
       <div className="hidden lg:flex relative items-center justify-center p-12 bg-gray-50">
         {/* Top-left Logo */}
-        <div className="absolute top-6 left-6">
+        <div className="absolute top-6 left-6 z-20">
           <Logo />
         </div>
 
