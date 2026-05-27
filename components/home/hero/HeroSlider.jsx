@@ -17,7 +17,7 @@ const HeroSlider = () => {
 
   return (
    
-    <section className="relative w-screen left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] overflow-hidden">
+    <section className="relative w-full overflow-x-hidden">
       <Carousel
         plugins={[autoplay.current]}
         opts={{ loop: true }}
