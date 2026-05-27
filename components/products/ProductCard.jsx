@@ -32,16 +32,11 @@ const ProductCard = ({ product }) => {
           <span className="text-sm ml-1 text-gray-600">4.5</span>
         </div>
 
-        {/* Material + Size */}
-        <p className="text-xs text-gray-500 mb-3">
-          {product?.material} • {product?.size} • {product?.color}
-        </p>
-
         {/* Price */}
         <div className="flex items-center justify-between mb-4">
           <div>
             <span className="text-2xl font-bold text-green-600">
-              ৳{product?.discountPrice || product?.price}
+              TK {product?.discountPrice || product?.price}
             </span>
 
             {product?.discountPrice && (
