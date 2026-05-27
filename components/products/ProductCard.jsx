@@ -2,57 +2,77 @@ import Image from "next/image";
 import { FaHeart, FaStar } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
+  const { images, productName, discountPrice, price, stock } = product;
+
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
       {/* Image */}
       <div className="relative w-full h-48">
         <Image
-          src={product?.images?.[0]}
-          alt={product?.productName}
+          src={images?.[0]}
+          alt={productName}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
         {/* Wishlist */}
         <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md z-10">
           <FaHeart className="text-gray-600" />
         </button>
+
+        {stock > 0 && stock < 5 && (
+          <div className="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm z-10">
+            Low Stock
+          </div>
+        )}
       </div>
 
       {/* Content */}
       <div className="p-6">
-        {/* Title */}
-        <h3 className="font-semibold text-gray-900 text-lg mb-1">
-          {product?.productName}
-        </h3>
+        <div className="flex justify-between gap-4">
+          {/* Title */}
+          <h3 className="font-semibold text-gray-900 text-lg mb-1 line-clamp-2 h-12">
+            {productName}
+          </h3>
 
-        {/* Rating (static for now) */}
-        <div className="flex items-center text-yellow-400 mb-3">
-          <FaStar className="text-sm" />
-          <span className="text-sm ml-1 text-gray-600">4.5</span>
+          {/* Rating (static for now) */}
+          <div className="flex items-center text-yellow-400 mb-3">
+            <FaStar className="text-sm" />
+            <span className="text-sm ml-1 text-gray-600">4.5</span>
+          </div>
         </div>
 
         {/* Price */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between my-4">
           <div>
-            <span className="text-2xl font-bold text-green-600">
-              TK {product?.discountPrice || product?.price}
+            <span className="text-xl font-bold text-green-600">
+              TK {discountPrice || price}
             </span>
 
-            {product?.discountPrice && (
+            {discountPrice && (
               <span className="text-sm text-gray-400 line-through ml-2">
-                ৳{product?.price}
+                ৳{price}
               </span>
             )}
           </div>
 
-          <span className="text-sm text-gray-500">Stock: {product?.stock}</span>
+          <span className="text-sm text-gray-500">Stock: {stock}</span>
         </div>
 
         {/* Button */}
-        <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium">
-          Add to Cart
-        </button>
+        {stock === 0 ? (
+          <button
+            disabled
+            className="w-full bg-red-600 text-white font-medium py-2 rounded-lg cursor-not-allowed"
+          >
+            Stock Out
+          </button>
+        ) : (
+          <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium">
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );
