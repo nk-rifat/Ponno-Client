@@ -1,3 +1,4 @@
+import FilterSidebar from "@/components/products/FilterSidebar";
 import ProductGrid from "@/components/products/ProductGrid";
 import { getProducts } from "@/lib/products";
 
@@ -17,7 +18,12 @@ const ProductsPage = async () => {
       </div>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <ProductGrid products={products} />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-8">
+          <FilterSidebar />
+          <div className="md:col-span-3">
+            <ProductGrid products={products} />
+          </div>
+        </div>
       </section>
     </main>
   );
