@@ -1,5 +1,6 @@
 import FilterSidebar from "@/components/products/FilterSidebar";
 import ProductGrid from "@/components/products/ProductGrid";
+import SortSelect from "@/components/products/SortSelect";
 import { getProducts } from "@/lib/products";
 
 const ProductsPage = async () => {
@@ -21,6 +22,10 @@ const ProductsPage = async () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-8">
           <FilterSidebar />
           <div className="md:col-span-3">
+            <div className="flex justify-end mb-3">
+              <SortSelect />
+            </div>
+
             <ProductGrid products={products} />
           </div>
         </div>
