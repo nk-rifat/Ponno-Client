@@ -20,7 +20,7 @@ const CategoryGrid = () => {
         {homeCategories.map((category) => (
           <Link
             key={category.id}
-            href={category?.linkUrl}
+            href={`/products?category=${category?.slug}`}
            
             className={`group relative w-full overflow-hidden rounded-xl border flex items-center justify-center transition-all duration-500 hover:border-amber-500/30 hover:shadow-[0_10px_25px_rgba(139,92,26,0.06)] md:row-span-1 ${category.gridClass}`}
           >
