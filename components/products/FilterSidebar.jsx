@@ -1,16 +1,6 @@
 "use client";
-
-const categories = [
-  "Home Decor",
-  "Lamps & Lighting",
-  "Basket & Storage",
-  "Birds Nest",
-  "Gifts & Crafts",
-  "Wall Decor",
-  "Fashion Accessories",
-  "Others",
-];
-
+import { categories } from "@/lib/categories";
+import { useSearchParams , useRouter} from "next/navigation";
 const priceRanges = [
   "Under TK 200",
   "TK 200 - TK 500",
@@ -18,16 +8,27 @@ const priceRanges = [
   "Over TK 1500",
 ];
 
-export default function FilterSidebar() {
+export default function FilterSidebar({ selectedCategory }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleChange = (slug) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (selectedCategory === slug) {
+      params.delete("category");
+    } else {
+      params.set("category", slug);
+    }
+
+    router.push(`/products?${params.toString()}`);
+  };
   return (
     <aside>
       <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sticky top-24">
-
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-semibold text-stone-900">
-            Filters
-          </h3>
+          <h3 className="text-xl font-semibold text-stone-900">Filters</h3>
 
           <button className="text-sm text-green-600 hover:text-green-700 font-medium transition">
             Reset
@@ -41,19 +42,16 @@ export default function FilterSidebar() {
           </h4>
 
           <div className="space-y-3">
-            {categories.map((category) => (
-              <label
-                key={category}
-                className="flex items-center cursor-pointer"
-              >
+            {Object.entries(categories).map(([slug, name]) => (
+              <label key={slug} className="flex items-center cursor-pointer">
                 <input
+                  checked={selectedCategory === slug}
+                  onChange={() => handleChange(slug)}
                   type="checkbox"
                   className="rounded border-stone-300 text-green-600 focus:ring-green-500 w-4 h-4"
                 />
 
-                <span className="ml-3 text-sm text-stone-600">
-                  {category}
-                </span>
+                <span className="ml-3 text-sm text-stone-600">{name}</span>
               </label>
             ))}
           </div>
@@ -67,19 +65,14 @@ export default function FilterSidebar() {
 
           <div className="space-y-3">
             {priceRanges.map((range) => (
-              <label
-                key={range}
-                className="flex items-center cursor-pointer"
-              >
+              <label key={range} className="flex items-center cursor-pointer">
                 <input
                   type="radio"
                   name="price-range"
                   className="border-stone-300 text-green-600 focus:ring-green-500 w-4 h-4"
                 />
 
-                <span className="ml-3 text-sm text-stone-600">
-                  {range}
-                </span>
+                <span className="ml-3 text-sm text-stone-600">{range}</span>
               </label>
             ))}
           </div>

@@ -2,25 +2,15 @@ import FilterSidebar from "@/components/products/FilterSidebar";
 import ProductGrid from "@/components/products/ProductGrid";
 import SortSelect from "@/components/products/SortSelect";
 import { getProducts } from "@/lib/products";
-
-const categoryMap = {
-  "home-decor": "Home Decor",
-  "lamps-lighting": "Lamps & Lighting",
-  "basket-storage": "Baskets & Storage",
-  "birds-nest": "Birds Nest",
-  "gifts-crafts": "Gifts & Crafts",
-  "wall-decor": "Wall Decor",
-  "fashion-accessories": "Fashion Accessories",
-  others: "Others",
-};
+import { categories } from "@/lib/categories";
 
 const ProductsPage = async ({ searchParams }) => {
   const params = await searchParams;
   const categorySlug = params?.category;
 
-  const category = categorySlug ? categoryMap[categorySlug] : null;
+  const category = categorySlug ? categories[categorySlug] : null;
 
-  const products = await getProducts({category});
+  const products = await getProducts({ category });
 
   return (
     <main>
@@ -36,7 +26,7 @@ const ProductsPage = async ({ searchParams }) => {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-8">
-          <FilterSidebar />
+          <FilterSidebar selectedCategory={categorySlug} />
           <div className="md:col-span-3">
             <div className="flex justify-end mb-3">
               <SortSelect />
