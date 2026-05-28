@@ -3,16 +3,21 @@ import ProductGrid from "@/components/products/ProductGrid";
 import SortSelect from "@/components/products/SortSelect";
 import { getProducts } from "@/lib/products";
 import { categories } from "@/lib/categories";
+import Pagination from "@/components/shared/Pagination";
 
 const ProductsPage = async ({ searchParams }) => {
   const params = await searchParams;
   const categorySlug = params?.category;
   const price = params?.price;
   const sort = params?.sort;
+  const page = Number(params?.page || 1);
 
   const category = categorySlug ? categories[categorySlug] : null;
 
-  const products = await getProducts({ category, price, sort });
+  const data = await getProducts({ category, price, sort, page });
+
+  const products = data.data;
+  const totalPages = data.pages;
 
   return (
     <main>
@@ -36,8 +41,10 @@ const ProductsPage = async ({ searchParams }) => {
             <div className="flex justify-end mb-3">
               <SortSelect />
             </div>
-
-            <ProductGrid products={products} />
+            <div>
+              <ProductGrid products={products} />
+              <Pagination totalPages={totalPages}/>
+            </div>
           </div>
         </div>
       </section>
