@@ -1,6 +1,6 @@
 "use client";
 import { categories } from "@/lib/categories";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const priceRanges = [
@@ -11,7 +11,6 @@ const priceRanges = [
 ];
 
 export default function FilterSidebar({ selectedCategory, selectedPrice }) {
-  
   const router = useRouter();
 
   const [category, setCategory] = useState(selectedCategory);
@@ -44,6 +43,13 @@ export default function FilterSidebar({ selectedCategory, selectedPrice }) {
     router.push(`/products?${params.toString()}`);
   };
 
+  //reset filter
+  const handleReset = () => {
+    setCategory(null);
+    setPrice(null);
+    router.push("/products");
+  };
+
   return (
     <aside>
       <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sticky top-24">
@@ -51,7 +57,7 @@ export default function FilterSidebar({ selectedCategory, selectedPrice }) {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-xl font-semibold text-stone-900">Filters</h3>
 
-          <button className="text-sm text-green-600 hover:text-green-700 font-medium transition">
+          <button onClick={handleReset} className="text-sm text-green-600 hover:text-green-700 font-medium transition">
             Reset
           </button>
         </div>
@@ -107,7 +113,10 @@ export default function FilterSidebar({ selectedCategory, selectedPrice }) {
         </div>
 
         {/* Apply Button */}
-        <button onClick={applyFilters} className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl text-sm font-medium transition-colors">
+        <button
+          onClick={applyFilters}
+          className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl text-sm font-medium transition-colors"
+        >
           Apply Filters
         </button>
       </div>
