@@ -1,20 +1,24 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaHeart, FaStar } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
-  const { images, productName, discountPrice, price, stock } = product;
+  const { _id, images, productName, discountPrice, price, stock } = product;
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
       {/* Image */}
+
       <div className="relative w-full h-48">
-        <Image
-          src={images?.[0]}
-          alt={productName}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-        />
+        <Link href={`/products/${_id}`}>
+          <Image
+            src={images?.[0]}
+            alt={productName}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          />
+        </Link>
 
         {/* Wishlist */}
         <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md z-10">
