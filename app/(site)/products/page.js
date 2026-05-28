@@ -8,10 +8,11 @@ const ProductsPage = async ({ searchParams }) => {
   const params = await searchParams;
   const categorySlug = params?.category;
   const price = params?.price;
+  const sort = params?.sort;
 
   const category = categorySlug ? categories[categorySlug] : null;
 
-  const products = await getProducts({ category, price });
+  const products = await getProducts({ category, price, sort });
 
   return (
     <main>
