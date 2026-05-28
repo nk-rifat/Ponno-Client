@@ -3,8 +3,24 @@ import ProductGrid from "@/components/products/ProductGrid";
 import SortSelect from "@/components/products/SortSelect";
 import { getProducts } from "@/lib/products";
 
-const ProductsPage = async () => {
-  const products = await getProducts();
+const categoryMap = {
+  "home-decor": "Home Decor",
+  "lamps-lighting": "Lamps & Lighting",
+  "basket-storage": "Baskets & Storage",
+  "birds-nest": "Birds Nest",
+  "gifts-crafts": "Gifts & Crafts",
+  "wall-decor": "Wall Decor",
+  "fashion-accessories": "Fashion Accessories",
+  others: "Others",
+};
+
+const ProductsPage = async ({ searchParams }) => {
+  const params = await searchParams;
+  const categorySlug = params?.category;
+
+  const category = categorySlug ? categoryMap[categorySlug] : null;
+
+  const products = await getProducts({category});
 
   return (
     <main>
