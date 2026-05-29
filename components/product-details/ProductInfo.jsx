@@ -35,7 +35,7 @@ const ProductInfo = ({ product }) => {
       </div>
 
       {/* Stock */}
-      <p className="text-sm text-gray-600">
+      <p className="text-sm text-gray-600 font-semibold">
         {stock > 0 ? `In Stock: ${stock}` : "Out of Stock"}
       </p>
     </div>
