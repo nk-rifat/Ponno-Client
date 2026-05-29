@@ -1,4 +1,5 @@
 import ProductGallery from "@/components/product-details/ProductGallery";
+import ProductInfo from "@/components/product-details/ProductInfo";
 import { getProductById } from "@/lib/products";
 
 const ProductDetailsPage = async ({ params }) => {
@@ -7,6 +8,7 @@ const ProductDetailsPage = async ({ params }) => {
   return (
     <>
       <ProductGallery images={product?.images} />
+      <ProductInfo product={product} />
     </>
   );
 };
