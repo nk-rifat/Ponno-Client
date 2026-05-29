@@ -13,7 +13,7 @@ export const heroSlides = [
     title: "Decor Your Dream Space",
     desc: "Explore beautiful bamboo & cane handicrafts, made with care , chosen for you.",
     buttonText: "View Gifts",
-    linkUrl: "/products/gifts"
+    linkUrl: "products?category=gifts-crafts"
     
   },
   {
@@ -22,6 +22,6 @@ export const heroSlides = [
     title: "Premium Jute Collection",
     desc: "Minimal, aesthetic and natural lifestyle.",
     buttonText: "Explore Jute",
-    linkUrl: "/category/jute"
+    linkUrl: "/products"
   },
 ];
