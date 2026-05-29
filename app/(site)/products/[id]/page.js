@@ -1,6 +1,9 @@
-const ProductDetailsPage = async({ params }) => {
+import { getProductById } from "@/lib/products";
+
+const ProductDetailsPage = async ({ params }) => {
   const { id } = await params;
-  return <div className="text-black">{id}</div>;
+  const product = await getProductById(id);
+  return <div className="text-black">{product.productName}</div>;
 };
 
 export default ProductDetailsPage;
