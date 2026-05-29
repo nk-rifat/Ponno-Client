@@ -9,7 +9,7 @@ const ProductGallery = ({ images = [] }) => {
   return (
     <div className="space-y-4">
       {/* Main Image */}
-      <div className="relative w-full h-100 rounded-2xl overflow-hidden bg-gray-100">
+      <div className="relative w-full h-100 overflow-hidden">
         <Image
           src={activeImage}
           alt="Product image"
