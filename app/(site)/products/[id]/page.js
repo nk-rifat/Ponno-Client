@@ -8,9 +8,13 @@ const ProductDetailsPage = async ({ params }) => {
   const product = await getProductById(id);
   return (
     <>
-      <ProductGallery images={product?.images} />
-      <ProductInfo product={product} />
-      <ProductActions product={product}/>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <ProductGallery images={product?.images} />
+        <div>
+          <ProductInfo product={product} />
+          <ProductActions product={product} />
+        </div>
+      </div>
     </>
   );
 };
