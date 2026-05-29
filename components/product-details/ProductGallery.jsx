@@ -5,6 +5,9 @@ import { useState } from "react";
 
 const ProductGallery = ({ images = [] }) => {
   const [activeImage, setActiveImage] = useState(images?.[0]);
+  
+
+  if (!activeImage) return null;
 
   return (
     <div className="space-y-4">
@@ -14,6 +17,7 @@ const ProductGallery = ({ images = [] }) => {
           src={activeImage}
           alt="Product image"
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover px-3"
         />
       </div>
@@ -28,7 +32,14 @@ const ProductGallery = ({ images = [] }) => {
               activeImage === img ? "border-green-500" : "border-transparent"
             }`}
           >
-            <Image src={img} alt="thumb" fill className="object-cover" />
+            <Image
+              src={img}
+              alt="thumb"
+              fill
+              loading="lazy"
+              sizes="80px"
+              className="object-cover"
+            />
           </button>
         ))}
       </div>
