@@ -18,12 +18,12 @@ const ProductGallery = ({ images = [] }) => {
           alt="Product image"
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover px-3"
+          className="object-cover rounded-2xl"
         />
       </div>
 
       {/* Thumbnails */}
-      <div className="flex gap-2 overflow-x-auto px-3">
+      <div className="flex gap-2 overflow-x-auto">
         {images?.map((img, index) => (
           <button
             key={index}
