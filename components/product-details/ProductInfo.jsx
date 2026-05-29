@@ -7,7 +7,7 @@ const ProductInfo = ({ product }) => {
     product;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 mx-3">
       {/* Title */}
       <h1 className="text-3xl font-bold text-gray-900">
         {productName}

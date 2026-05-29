@@ -16,7 +16,7 @@ const ProductActions = ({ product }) => {
   };
 
   return (
-    <div className="space-y-4 mt-6">
+    <div className="space-y-4 mt-6 mx-3">
       {/* Quantity */}
       <div className="flex items-center gap-4">
         <button
