@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { homeCategories } from "./categoryData";
+import { homeCategories } from "@/data/categoryData";
+
 
 const CategoryGrid = () => {
   return (

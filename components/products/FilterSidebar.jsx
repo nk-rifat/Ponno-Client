@@ -1,5 +1,5 @@
 "use client";
-import { categories } from "@/lib/categories";
+import { categories } from "@/data/categories";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

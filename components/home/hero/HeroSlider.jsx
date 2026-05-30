@@ -8,7 +8,8 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import HeroSlide from "./HeroSlide";
-import { heroSlides } from "./heroData";
+import { heroSlides } from "@/data/heroData";
+
 
 const HeroSlider = () => {
   const autoplay = useRef(

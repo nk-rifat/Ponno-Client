@@ -2,8 +2,8 @@ import FilterSidebar from "@/components/products/FilterSidebar";
 import ProductGrid from "@/components/products/ProductGrid";
 import SortSelect from "@/components/products/SortSelect";
 import { getProducts } from "@/lib/products";
-import { categories } from "@/lib/categories";
 import Pagination from "@/components/shared/Pagination";
+import { categories } from "@/data/categories";
 
 const ProductsPage = async ({ searchParams }) => {
   const params = await searchParams;
