@@ -4,9 +4,9 @@ const MaterialsPage = () => {
   return (
     <>
       {/* HEADER */}
-      <div className="bg-green-600 py-5 lg:py-10 text-center px-6">
+      <div className="bg-linear-to-br from-emerald-900 via-green-950 to-stone-900 py-5 lg:py-10 text-center px-6">
         <div className="max-w-3xl mx-auto">
-          <span className="inline-block text-white uppercase tracking-widest text-xs font-bold bg-amber-500 px-3 py-1 rounded-full mb-5">
+          <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold tracking-widest uppercase bg-emerald-500/10 text-emerald-300 rounded-full border border-emerald-500/20 mb-4">
             Materials We Trust
           </span>
 

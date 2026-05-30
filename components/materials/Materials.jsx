@@ -35,7 +35,7 @@ const Materials = () => {
                 <div
                   className={`lg:col-span-6 flex flex-col justify-center ${isReversed ? "lg:order-1" : "lg:order-2"}`}
                 >
-                  <h3 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-slate-900">
+                  <h3 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-emerald-800">
                     Why {item.name}?
                   </h3>
 
