@@ -10,7 +10,7 @@ const CategoryGrid = () => {
         <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-amber-800">
           Handcrafted Collections
         </span>
-        <h2 className="text-3xl sm:text-4xl md:5xl lg:6xl font-semibold text-stone-950 tracking-tight mt-0.5">
+        <h2 className="text-3xl sm:text-4xl md:5xl lg:6xl font-semibold text-emerald-800 tracking-tight mt-0.5">
           Shop by Category
         </h2>
       </div>
