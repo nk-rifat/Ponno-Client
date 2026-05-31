@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { homeCategories } from "@/data/categoryData";
 
-
 const CategoryGrid = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-stone-900">
