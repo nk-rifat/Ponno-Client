@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { SearchAction } from "./SearchAction";
 import { NavActions } from "./ShopActions";
+import { CategoryLinks } from "./CategoryLinks";
 
 export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
   const menuItemClass =
@@ -24,6 +25,25 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
       <div className="hidden md:flex items-center gap-4 lg:gap-8 font-medium text-base">
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
+
+          // Categories dropdown
+
+          if (link.type === "dropdown") {
+            return (
+              <div key={link.label} className="relative group">
+                <span className="cursor-pointer py-2 text-gray-700 hover:text-green-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-green-600 after:transition-all after:duration-300 after:w-0 group-hover:after:w-full">
+                  Categories
+                </span>
+
+                <div className="absolute left-0 top-full mt-3 w-80 bg-white rounded-xl  p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="grid grid-cols-2 gap-2">
+                    <CategoryLinks />
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          
           return (
             <Link
               key={link.label}
