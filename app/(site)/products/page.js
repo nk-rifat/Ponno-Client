@@ -33,16 +33,23 @@ const ProductsPage = async ({ searchParams }) => {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-8">
+
+          {/* Filter */}
           <FilterSidebar
             selectedCategory={categorySlug}
             selectedPrice={price}
           />
           <div className="md:col-span-3">
             <div className="flex justify-end mb-3">
+
+              {/* Sorting */}
               <SortSelect />
             </div>
             <div>
+              {/* Products Grid */}
               <ProductGrid products={products} />
+
+              {/* Pagination */}
               <Pagination totalPages={totalPages}/>
             </div>
           </div>

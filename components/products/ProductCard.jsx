@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
       <div className="p-6">
         <div className="flex justify-between gap-4">
           {/* Title */}
-          <h3 className="font-semibold text-gray-900 text-[16px] mb-1 line-clamp-2 h-12">
+          <h3 className="font-semibold text-emerald-900 text-[16px] mb-1 line-clamp-2 h-12">
             {productName}
           </h3>
 
