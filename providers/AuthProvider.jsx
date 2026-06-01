@@ -1,14 +1,10 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
-
-import auth from "../config/firebase";
-import api, {
-  registerTokenGetter,
-  registerTokenSetter,
-} from "../lib/axios/interceptor.js";
+import React, { useEffect, useRef, useState } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { backendLogin } from "../services/authService";
-import { AuthContext } from "../context/index";
+import { auth } from "@/config/firebase.js";
+import { registerTokenGetter, registerTokenSetter } from "@/lib/axios/interceptor";
+import { backendLogin } from "@/services/authService";
+import { AuthContext } from "@/context";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

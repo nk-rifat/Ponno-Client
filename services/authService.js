@@ -1,3 +1,4 @@
+import api from "@/lib/axios/interceptor";
 import auth from "../firebase/firebase.config";
 import {
   createUserWithEmailAndPassword,
@@ -7,7 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-import api from "../lib/axios/interceptor";
+
 
 const provider = new GoogleAuthProvider();
 
