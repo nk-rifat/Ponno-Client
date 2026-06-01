@@ -19,7 +19,7 @@ const LoginPage = () => {
 
         {/* Content */}
         <div className="relative z-10 max-w-lg text-center flex flex-col items-center gap-6">
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-4xl font-black text-emerald-900 tracking-tight">
             Welcome Back!
           </h1>
 
@@ -40,7 +40,7 @@ const LoginPage = () => {
 
           {/* Header */}
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900">Sign In</h2>
+            <h2 className="text-2xl font-bold text-emerald-800">Sign In</h2>
           </div>
 
           {/* Form */}

@@ -28,7 +28,7 @@ const RegisterPage = () => {
 
           {/* Header */}
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900">Create Account</h2>
+            <h2 className="text-2xl font-bold text-emerald-800">Create Account</h2>
           </div>
           {/* <RegisterForm /> */}
           <RegisterForm />
