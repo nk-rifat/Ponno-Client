@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProductCard from "@/components/products/ProductCard";
-import { getFeaturedProducts } from "@/lib/products";
+import { getFeaturedProducts } from "@/lib/api/products";
+
 
 const FeaturedProducts = async () => {
   const { data: products } = await getFeaturedProducts();

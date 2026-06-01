@@ -2,7 +2,7 @@ import ProductActions from "@/components/product-details/ProductActions";
 import ProductGallery from "@/components/product-details/ProductGallery";
 import ProductInfo from "@/components/product-details/ProductInfo";
 import RelatedProducts from "@/components/product-details/RelatedProducts";
-import { getProductById, getRelatedProducts } from "@/lib/products";
+import { getProductById, getRelatedProducts } from "@/lib/api/products";
 import Link from "next/link";
 
 const ProductDetailsPage = async ({ params }) => {
