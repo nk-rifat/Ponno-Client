@@ -121,6 +121,7 @@ const RegisterForm = () => {
       {/* Button */}
       <div className="pt-2">
         <button
+          disabled={isSubmitting}
           type="submit"
           className="w-full px-4 py-3 rounded-xl bg-green-600 text-white font-medium shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500/30 active:bg-green-800 transition-shadow"
         >
