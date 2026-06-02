@@ -128,3 +128,17 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  /* Default input style */
+  .input-style {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-300 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-300 shadow-sm transition-shadow mt-1;
+  }
+
+  /* Input error state */
+  .input-error {
+    @apply border-red-500 
+           focus:ring-red-500/30 
+           focus:border-red-500;
+  }
+}
