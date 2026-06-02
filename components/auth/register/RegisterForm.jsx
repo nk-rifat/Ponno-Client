@@ -3,6 +3,7 @@
 import Field from "@/components/shared/Field";
 import Link from "next/link";
 import { useState } from "react";
+import { CgPassword } from "react-icons/cg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterForm = () => {
@@ -17,7 +18,7 @@ const RegisterForm = () => {
         <input
           type="text"
           placeholder="Enter your First Name"
-          className={`input-style`}
+          className={inputStyle}
         />
       </Field>
 
@@ -26,7 +27,7 @@ const RegisterForm = () => {
         <input
           type="text"
           placeholder="Enter your Last Name"
-          className={`input-style`}
+          className={inputStyle}
         />
       </Field>
 
@@ -35,7 +36,7 @@ const RegisterForm = () => {
         <input
           type="email"
           placeholder="Enter your email"
-          className={`input-style`}
+          className={inputStyle}
         />
       </Field>
 
@@ -45,7 +46,7 @@ const RegisterForm = () => {
           <input
             type={show ? "text" : "password"}
             placeholder="••••••••"
-            className={`${`input-style`} pr-10`}
+            className={`${inputStyle} pr-10`}
           />
 
           <button
