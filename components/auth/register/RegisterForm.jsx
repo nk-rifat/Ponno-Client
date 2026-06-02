@@ -1,52 +1,105 @@
 "use client";
 
 import Field from "@/components/shared/Field";
+import { registerUser } from "@/lib/api/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { CgPassword } from "react-icons/cg";
+import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const RegisterForm = () => {
   const [show, setShow] = useState(false);
+  const router = useRouter();
 
-  const inputStyle =
-    "w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-300 shadow-sm transition-shadow mt-1";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError,
+    reset,
+  } = useForm();
+
+  const submitForm = async (data) => {
+    try {
+      const res = await registerUser(data);
+
+      // Success alert
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: res.message || "Please verify your email.",
+      });
+
+      router.push("/login");
+    } catch (error) {
+      // React Hook Form server error
+      setError("root.serverError", {
+        type: "server",
+        message:
+          err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text:
+          err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
+    }
+
+    reset();
+  };
+
   return (
-    <form className="space-y-4 pb-10">
+    <form onSubmit={handleSubmit(submitForm)} className="space-y-4 pb-10">
       {/* First Name */}
-      <Field label="First Name">
+      <Field label="First Name" error={errors.firstName}>
         <input
+          {...register("firstName", { required: "First Name is Required" })}
           type="text"
           placeholder="Enter your First Name"
-          className={inputStyle}
+          className={`input-style ${errors.firstName ? "input-error" : ""}`}
         />
       </Field>
 
       {/* Last Name */}
-      <Field label="Last Name">
+      <Field label="Last Name" error={errors.lastName}>
         <input
+          {...register("lastName", { required: "Last Name is Required" })}
           type="text"
           placeholder="Enter your Last Name"
-          className={inputStyle}
+          className={`input-style ${errors.lastName ? "input-error" : ""}`}
         />
       </Field>
 
       {/* Email */}
-      <Field label="Email">
+      <Field label="Email" error={errors.email}>
         <input
+          {...register("email", { required: "Email is Required" })}
           type="email"
           placeholder="Enter your email"
-          className={inputStyle}
+          className={`input-style ${errors.email ? "input-error" : ""}`}
         />
       </Field>
 
       {/* Password */}
-      <Field label="Password">
+      <Field label="Password" error={errors.password}>
         <div className="relative">
           <input
+            {...register("password", {
+              required: "Password is Required",
+              minLength: {
+                value: 8,
+                message: "Your password must be at least 8 characters ",
+              },
+            })}
             type={show ? "text" : "password"}
             placeholder="••••••••"
-            className={`${inputStyle} pr-10`}
+            className={`input-style ${errors.password ? "input-error" : ""}`}
           />
 
           <button
@@ -59,13 +112,19 @@ const RegisterForm = () => {
         </div>
       </Field>
 
+      {errors?.root?.serverError && (
+        <p className="text-red-500 text-sm">
+          {errors.root.serverError.message}
+        </p>
+      )}
+
       {/* Button */}
       <div className="pt-2">
         <button
-          type="button"
+          type="submit"
           className="w-full px-4 py-3 rounded-xl bg-green-600 text-white font-medium shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500/30 active:bg-green-800 transition-shadow"
         >
-          Register
+          {isSubmitting ? "Creating account..." : "Create account"}
         </button>
       </div>
 
