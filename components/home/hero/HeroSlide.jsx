@@ -5,16 +5,14 @@ import Link from "next/link";
 const HeroSlide = ({ slide }) => {
   return (
     <div className="relative h-[41vh] sm:h-[55vh] md:h-[65vh] lg:h-[75vh] w-full overflow-hidden flex items-center">
-      <div className="absolute inset-0">
-        <Image
-          src={slide.image}
-          alt={slide.title || "Hero Banner"}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
+      <Image
+        src={slide.image}
+        alt={slide.title || "Hero Banner"}
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
 
       {/* Text Content Block */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
