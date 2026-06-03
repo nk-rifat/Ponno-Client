@@ -8,8 +8,7 @@ import { Suspense } from "react";
 
 const ProductDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const productPromise = getProductById(id);
-  const product = await productPromise;
+  const product = await getProductById(id);
   const relatedProductsPromise = getRelatedProducts(
     product.category,
     product._id,
