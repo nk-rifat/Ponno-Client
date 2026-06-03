@@ -1,6 +1,7 @@
 import ProductCard from "../products/ProductCard";
 
-const RelatedProducts = ({ products = [] }) => {
+const RelatedProducts = async ({ relatedProductsPromise }) => {
+  const products = await relatedProductsPromise;
   return (
     <div className="max-w-7xl mx-auto mt-12">
       <h2 className="text-2xl font-bold mb-6 mx-4">Related Products</h2>

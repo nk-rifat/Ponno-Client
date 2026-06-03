@@ -4,11 +4,13 @@ import ProductInfo from "@/components/product-details/ProductInfo";
 import RelatedProducts from "@/components/product-details/RelatedProducts";
 import { getProductById, getRelatedProducts } from "@/lib/api/products";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const ProductDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const product = await getProductById(id);
-  const relatedProducts = await getRelatedProducts(
+  const productPromise = getProductById(id);
+  const product = await productPromise;
+  const relatedProductsPromise = getRelatedProducts(
     product.category,
     product._id,
   );
@@ -16,7 +18,6 @@ const ProductDetailsPage = async ({ params }) => {
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 pt-5 sm:pt-7 md:pt-10">
-
         {/* Breadcrumb */}
         <nav className="text-base font-medium text-gray-500 flex items-center gap-2 pl-4">
           <Link href="/" className="hover:text-green-600">
@@ -41,7 +42,11 @@ const ProductDetailsPage = async ({ params }) => {
           </div>
         </div>
       </div>
-      <RelatedProducts products={relatedProducts} />
+      <Suspense
+        fallback={<p className="text-emerald-800">Loading related products </p>}
+      >
+        <RelatedProducts relatedProductsPromise={relatedProductsPromise} />
+      </Suspense>
     </>
   );
 };
