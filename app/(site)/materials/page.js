@@ -10,7 +10,7 @@ const MaterialsPage = () => {
             Materials We Trust
           </span>
 
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white leading-tight">
             Crafted From Nature, <br /> Built With Purpose
           </h1>
         </div>

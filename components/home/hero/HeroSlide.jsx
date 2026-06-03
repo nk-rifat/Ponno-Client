@@ -18,7 +18,7 @@ const HeroSlide = ({ slide }) => {
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
         <div className="max-w-2xl py-6 rounded-2xl bg-white/6 text-center sm:text-center md:text-center lg:text-left flex flex-col items-center lg:items-start md:border-l-2 md:border-white/20 md:pl-8">
           {/* Heading */}
-          <h1 className="text-5xl sm:text-6xl md:7xl lg:text-8xl font-semibold text-green-950 ">
+          <h1 className="text-4xl sm:text-5xl md:6xl lg:text-[78px] font-semibold text-green-950 ">
             {slide?.title}
           </h1>
 

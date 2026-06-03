@@ -36,7 +36,7 @@ const CategoryGrid = () => {
             </div>
 
             <div className="relative z-10 px-5 py-3 mx-4 rounded-lg border border-green-950/40 bg-white/60 backdrop-blur-md text-center max-w-[85%] shadow-xs transition-all duration-500 ease-out group-hover:bg-white/95 group-hover:border-amber-600/40 group-hover:scale-105 group-hover:shadow-sm">
-              <h3 className="text-base sm:text-lg font-light tracking-wide text-stone-900 transition-colors duration-300 group-hover:text-amber-900">
+              <h3 className="text-base font-light tracking-wide text-stone-900 transition-colors duration-300 group-hover:text-amber-900">
                 {category?.name}
               </h3>
               <div className="h-px w-0 bg-amber-600 mx-auto mt-1 transition-all duration-500 ease-out group-hover:w-full" />

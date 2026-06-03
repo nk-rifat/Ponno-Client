@@ -11,11 +11,11 @@ const About = () => {
             Our Heritage
           </span>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-3 text-white">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 text-white">
             About Ponno
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-stone-300 font-light">
+          <p className="text-sm md:text-xl max-w-3xl mx-auto leading-relaxed text-stone-300 font-light">
             Celebrating Bangladesh is rich craftsmanship through sustainable,
             handcrafted products that bring tradition, beauty, and purpose into
             modern homes.
@@ -27,7 +27,7 @@ const About = () => {
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-5 relative group">
-            <div className="absolute -inset-4 bg-emerald-100/70 rounded-3xl -rotate-2 transform transition-transform group-hover:rotate-0 duration-300"></div>
+            <div className="absolute -inset-4 lg:bg-emerald-100/70 rounded-3xl -rotate-2 transform transition-transform group-hover:rotate-0 duration-300"></div>
             <Image
               src="https://res.cloudinary.com/dlm5fnpnv/image/upload/v1780141952/artisan-weaving-basket_1_zoxt6b.jpg"
               alt="Handcrafted products"
@@ -152,9 +152,7 @@ const About = () => {
                 key={idx}
                 className="bg-white p-8 rounded-2xl border shadow-sm text-center flex flex-col items-center hover:shadow-md  hover:-translate-y-1 hover:border-green-300 transition-all duration-300"
               >
-                <div className="p-3 bg-green-50 rounded-full">
-                  {item.icon}
-                </div>
+                <div className="p-3 bg-green-50 rounded-full">{item.icon}</div>
                 <h3 className="font-bold text-lg text-emerald-800 mb-2">
                   {item.title}
                 </h3>
