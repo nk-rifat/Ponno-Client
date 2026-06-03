@@ -55,7 +55,7 @@ export default function FilterSidebar({ selectedCategory, selectedPrice }) {
       <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sticky top-24">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-semibold text-stone-900">Filters</h3>
+          <h3 className="text-xl font-semibold text-emerald-700">Filters</h3>
 
           <button onClick={handleReset} className="text-sm text-green-600 hover:text-green-700 font-medium transition">
             Reset
@@ -64,7 +64,7 @@ export default function FilterSidebar({ selectedCategory, selectedPrice }) {
 
         {/* Categories */}
         <div className="mb-8">
-          <h4 className="text-sm font-semibold text-stone-900 mb-4">
+          <h4 className="text-sm font-semibold text-emerald-700 mb-4">
             Categories
           </h4>
 
@@ -86,7 +86,7 @@ export default function FilterSidebar({ selectedCategory, selectedPrice }) {
 
         {/* Price Range */}
         <div className="mb-8">
-          <h4 className="text-sm font-semibold text-stone-900 mb-4">
+          <h4 className="text-sm font-semibold text-emerald-700 mb-4">
             Price Range
           </h4>
 
