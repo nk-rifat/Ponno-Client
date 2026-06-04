@@ -26,14 +26,14 @@ const ProductsPage = async ({ searchParams }) => {
           All Products
         </h1>
         <p className="text-sm md:text-lg text-green-100/90 font-light leading-relaxed">
-          Discover beautiful, locally-sourced bamboo, cane, and jute heritage <br/>
+          Discover beautiful, locally-sourced bamboo, cane, and jute heritage{" "}
+          <br />
           crafts handmade with precision by our trusted traditional artisans.
         </p>
       </div>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-8">
-
           {/* Filter */}
           <FilterSidebar
             selectedCategory={categorySlug}
@@ -41,7 +41,6 @@ const ProductsPage = async ({ searchParams }) => {
           />
           <div className="md:col-span-3">
             <div className="flex justify-end mb-3">
-
               {/* Sorting */}
               <SortSelect />
             </div>
@@ -50,7 +49,7 @@ const ProductsPage = async ({ searchParams }) => {
               <ProductGrid products={products} />
 
               {/* Pagination */}
-              <Pagination totalPages={totalPages}/>
+              <Pagination totalPages={totalPages} />
             </div>
           </div>
         </div>
