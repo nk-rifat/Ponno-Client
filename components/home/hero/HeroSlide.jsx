@@ -2,23 +2,19 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const HeroSlide = ({ slide, priority = false, shouldLoad = false }) => {
+const HeroSlide = ({ slide, priority = false }) => {
   return (
     <div className="relative h-[41vh] sm:h-[55vh] md:h-[65vh] lg:h-[75vh] w-full overflow-hidden flex items-center">
-      {shouldLoad ? (
-        <Image
-          src={slide.image}
-          alt={slide.title || "Hero Banner"}
-          fill
-          priority={priority}
-          loading={priority ? "eager" : "lazy"}
-          sizes="100vw"
-          quality={75}
-          className="object-cover"
-        />
-      ) : (
-        <div className="absolute inset-0 bg-emerald-950" />
-      )}
+      <Image
+        src={slide.image}
+        alt={slide.title || "Hero Banner"}
+        fill
+        priority={priority}
+        loading={priority ? "eager" : "lazy"}
+        sizes="100vw"
+        quality={75}
+        className="object-cover"
+      />
 
       {/* Text Content Block */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
