@@ -5,7 +5,6 @@ import { homeCategories } from "@/data/categoryData";
 const CategoryGrid = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-stone-900">
-      
       <div className="border-b border-stone-200 pb-3 mb-8 text-center">
         <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-amber-800">
           Handcrafted Collections
@@ -17,19 +16,22 @@ const CategoryGrid = () => {
 
       {/* Grid Container */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[190px]">
-        {homeCategories.map((category) => (
+        {homeCategories.map((category, index) => (
           <Link
             key={category.id}
             href={`/products?category=${category?.slug}`}
-           
+            prefetch={false}
             className={`group relative w-full overflow-hidden rounded-xl border flex items-center justify-center transition-all duration-500 hover:border-amber-500/30 hover:shadow-[0_10px_25px_rgba(139,92,26,0.06)] md:row-span-1 ${category.gridClass}`}
           >
             <div className="absolute inset-0 z-0 w-full h-full">
               <Image
-                src={category?.imageUrl}
+                src={category.imageUrl}
                 alt={category?.name}
                 fill
-                sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                priority={index < 2}
+                loading={index < 2 ? "eager" : "lazy"}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={75}
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-stone-900/10 transition-opacity duration-500 group-hover:bg-stone-900/5" />

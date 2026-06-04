@@ -48,6 +48,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
             <Link
               key={link.label}
               href={link.href}
+              prefetch={false}  
               className={`transition-all duration-200 py-2 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-green-600 after:transition-all after:duration-300 ${
                 isActive
                   ? "text-green-600 font-semibold after:w-full"

@@ -9,6 +9,10 @@ const inter = Inter({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.className}>
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+      </head>
       <body>{children}</body>
     </html>
   );

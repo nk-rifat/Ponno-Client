@@ -44,6 +44,7 @@ export default function NotFound() {
           <div className="flex flex-col items-center justify-center mt-4 gap-3 sm:flex-row">
             <Link
               href="/"
+              prefetch={false}
               className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-200 active:scale-95 dark:hover:shadow-emerald-900"
             >
               <HiHome className="h-4 w-4" aria-hidden="true" />
@@ -52,6 +53,7 @@ export default function NotFound() {
 
             <Link
               href="/products"
+              prefetch={false}
               className="inline-flex items-center gap-2 rounded-xl border border-emerald-300 bg-white px-6 py-3 text-sm font-semibold text-emerald-700 shadow-sm transition-all duration-200 hover:bg-emerald-50 active:scale-95 dark:border-emerald-700 dark:bg-base-200 dark:text-emerald-400 dark:hover:bg-emerald-950"
             >
               <HiShoppingBag className="h-4 w-4" aria-hidden="true" />

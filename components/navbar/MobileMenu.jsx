@@ -54,6 +54,7 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
                 <Link
                   key={link.label}
                   href={link.href}
+                  prefetch={false}
                   className={`px-3 py-2.5 font-medium rounded-lg transition-all ${
                     isActive
                       ? "bg-green-50 text-green-600"
@@ -72,6 +73,7 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
           <div className="grid grid-cols-2 gap-2">
             <Link
               href="/profile"
+              prefetch={false}
               className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50"
               onClick={() => setMenuOpen(false)}
             >

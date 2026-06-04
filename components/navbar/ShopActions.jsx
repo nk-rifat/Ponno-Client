@@ -9,6 +9,7 @@ export const NavActions = ({ cartCount = 0 }) => {
       {/* Wishlist */}
       <Link
         href="/wishlist"
+        prefetch={false}
         className={`p-2 text-gray-600 rounded-full transition-colors hover:text-red-500`}
       >
         <FaHeart className="text-xl" />
@@ -17,6 +18,7 @@ export const NavActions = ({ cartCount = 0 }) => {
       {/* Cart */}
       <Link
         href="/cart"
+        prefetch={false}
         className={`p-2 text-gray-600 rounded-full transition-colors hover:text-green-600 relative`}
       >
         <FaShoppingCart className="text-xl" />

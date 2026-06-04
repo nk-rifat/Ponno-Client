@@ -10,12 +10,13 @@ const ProductCard = ({ product }) => {
       {/* Image */}
 
       <div className="relative w-full h-48">
-        <Link href={`/products/${_id}`}>
+        <Link href={`/products/${_id}`} prefetch={false}>
           <Image
             src={images?.[0]}
             alt={productName}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
+            quality={75}
             className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         </Link>
@@ -56,7 +57,7 @@ const ProductCard = ({ product }) => {
 
             {discountPrice && (
               <span className="text-sm text-gray-400 line-through ml-2">
-                ৳{price}
+                TK {price}
               </span>
             )}
           </div>

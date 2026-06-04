@@ -16,7 +16,7 @@ const FeaturedProducts = async () => {
           </p>
         </div>
 
-        <Link href="/products" className="font-medium text-emerald-600 hover:text-emerald-800">
+        <Link href="/products" prefetch={false} className="font-medium text-emerald-600 hover:text-emerald-800">
           View All Products →
         </Link>
       </div>

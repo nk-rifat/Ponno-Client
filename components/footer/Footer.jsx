@@ -31,19 +31,15 @@ const Footer = () => {
             <div className="flex justify-center gap-3 text-base text-gray-400">
               <Link
                 href="/products"
+                prefetch={false}
                 className="hover:text-green-600 transition"
               >
                 Products
               </Link>
 
               <Link
-                href="/new-arrivals"
-                className="hover:text-green-600 transition"
-              >
-                New Arrivals
-              </Link>
-              <Link
                 href="/about-us"
+                prefetch={false}
                 className="hover:text-green-600 transition"
               >
                 About Us
@@ -56,17 +52,23 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-3">Company</h3>
 
             <div className="flex justify-center gap-3 text-base text-gray-400">
-              <Link href="/contact" className="hover:text-green-600 transition">
+              <Link
+                href="/contact"
+                prefetch={false}
+                className="hover:text-green-600 transition"
+              >
                 Contact Us
               </Link>
               <Link
                 href="/privacy-policy"
+                prefetch={false}
                 className="hover:text-green-600 transition"
               >
                 Privacy
               </Link>
               <Link
                 href="/terms-conditions"
+                prefetch={false}
                 className="hover:text-green-600 transition"
               >
                 Terms
