@@ -9,7 +9,7 @@ import { Suspense } from "react";
 const ProductDetailsPage = async ({ params }) => {
   const { id } = await params;
   const product = await getProductById(id);
-  const relatedProductsPromise = getRelatedProducts(
+  const relatedProducts = await getRelatedProducts(
     product.category,
     product._id,
   );
@@ -41,11 +41,7 @@ const ProductDetailsPage = async ({ params }) => {
           </div>
         </div>
       </div>
-      <Suspense
-        fallback={<p className="text-emerald-800">Loading related products </p>}
-      >
-        <RelatedProducts relatedProductsPromise={relatedProductsPromise} />
-      </Suspense>
+      <RelatedProducts products={relatedProducts} />
     </>
   );
 };
