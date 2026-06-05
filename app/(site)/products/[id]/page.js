@@ -4,7 +4,7 @@ import ProductInfo from "@/components/product-details/ProductInfo";
 import RelatedProducts from "@/components/product-details/RelatedProducts";
 import { getProductById, getRelatedProducts } from "@/lib/api/products";
 import Link from "next/link";
-import { Suspense } from "react";
+
 
 const ProductDetailsPage = async ({ params }) => {
   const { id } = await params;
