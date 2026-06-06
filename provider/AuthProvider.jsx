@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
   // logout
   const logout = async () => {
     try {
-      await axiosInstance.post("/auth/logout");
+      await axiosInstance.post("/api/auth/logout");
     } finally {
       setUser(null);
     }

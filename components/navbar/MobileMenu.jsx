@@ -5,9 +5,21 @@ import { FaBars, FaTimes, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { NavActions } from "./ShopActions";
 import { CategoryLinks } from "./CategoryLinks";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
   const [catOpen, setCatOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const router = useRouter();
+  const handleLogOut = async () => {
+    try {
+      await logout();
+      setMenuOpen(false);
+    } finally {
+      router.push("/login");
+    }
+  };
   return (
     <>
       {/* MOBILE HEADER BUTTONS */}
@@ -79,12 +91,21 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
             >
               <FaUser /> Profile
             </Link>
-            <button
-              className="flex items-center justify-center gap-2 py-2.5 border border-red-100 text-red-600 bg-red-50/50 rounded-xl text-sm font-medium hover:bg-red-50"
-              onClick={() => setMenuOpen(false)}
-            >
-              <FaSignOutAlt /> Logout
-            </button>
+            {user?.isVerified ? (
+              <button
+                className="flex items-center justify-center gap-2 py-2.5 border border-red-100 text-red-600 bg-red-50/50 rounded-xl text-sm font-medium hover:bg-red-50"
+                onClick={handleLogOut}
+              >
+                <FaSignOutAlt /> Logout
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center justify-center gap-2 py-2.5 border border-green-300 text-gray-800 bg-white/8 rounded-xl text-sm font-medium hover:bg-green-50"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       )}
