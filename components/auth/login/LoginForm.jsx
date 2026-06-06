@@ -38,7 +38,10 @@ const LoginForm = () => {
           showConfirmButton: false,
         });
 
-        router.push("/");
+        const params = new URLSearchParams(window.location.search);
+        const next = params.get("next") || "/dashboard";
+
+        router.push(next);
       } else {
         Swal.fire({
           icon: "error",
