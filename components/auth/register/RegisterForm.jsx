@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
-const RegisterForm = () => {
+const RegisterForm = ({ onSuccess }) => {
   const [show, setShow] = useState(false);
   const router = useRouter();
 
@@ -24,6 +24,7 @@ const RegisterForm = () => {
   const submitForm = async (data) => {
     try {
       const res = await registerUser(data);
+      onSuccess?.();
 
       // Success alert
       Swal.fire({

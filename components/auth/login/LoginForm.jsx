@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 const buttonStyle =
   "w-full px-4 py-3 rounded-xl bg-green-600 text-white font-medium shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500/30 active:bg-green-800 transition-colors transition-shadow";
 
-const LoginForm = () => {
+const LoginForm = ({ onSuccess }) => {
   const { login } = useAuth();
   const router = useRouter();
   const {
@@ -37,9 +37,9 @@ const LoginForm = () => {
           timer: 1000,
           showConfirmButton: false,
         });
-
+        onSuccess?.();
         const params = new URLSearchParams(window.location.search);
-        const next = params.get("next") || "/dashboard";
+        const next = params.get("next") || "/";
 
         router.push(next);
       } else {

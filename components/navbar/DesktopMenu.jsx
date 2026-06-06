@@ -37,7 +37,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
       await logout();
       closeUserMenu();
     } finally {
-      router.push("/login");
+      router.replace("/");
     }
   };
   return (

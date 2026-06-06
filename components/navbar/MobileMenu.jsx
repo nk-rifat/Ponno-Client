@@ -17,7 +17,7 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
       await logout();
       setMenuOpen(false);
     } finally {
-      router.push("/login");
+      router.replace("/");
     }
   };
   return (

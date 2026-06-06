@@ -15,7 +15,7 @@ function matchesRoute(pathname, routes) {
 
 // Middleware
 
-export function middleware(request) {
+export function proxy(request) {
   const { pathname } = request.nextUrl;
   const accessToken = request.cookies.get("accessToken")?.value;
 

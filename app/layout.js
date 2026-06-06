@@ -7,16 +7,20 @@ const inter = Inter({
   display: "swap",
 });
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, modal }) {
   return (
     <html lang="en" className={inter.className}>
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
       </head>
-      <AuthProvider>
-        <body>{children}</body>
-      </AuthProvider>
+
+      <body>
+        <AuthProvider>
+          {children}
+          {modal}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
