@@ -2,29 +2,102 @@
 
 import Link from "next/link";
 import Field from "@/components/shared/Field";
-
-const inputStyle =
-  "w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-500 shadow-sm transition-colors transition-shadow";
+import { useForm } from "react-hook-form";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const buttonStyle =
   "w-full px-4 py-3 rounded-xl bg-green-600 text-white font-medium shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500/30 active:bg-green-800 transition-colors transition-shadow";
 
 const LoginForm = () => {
+  const { login } = useAuth();
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError,
+    reset,
+  } = useForm();
+
+  const submitForm = async (data) => {
+    const payload = {
+      email: data.email,
+      password: data.password,
+    };
+
+    try {
+      const res = await login(payload);
+
+      if (res && res.id) {
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          timer: 1000,
+          showConfirmButton: false,
+        });
+
+        router.push("/");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: res?.data?.message || "Please try again",
+        });
+      }
+    } catch (err) {
+      // React Hook Form server error
+      setError("root.serverError", {
+        type: "server",
+        message:
+          err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text:
+          err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
+    }
+    reset();
+  };
   return (
-    <form className="space-y-4">
+    <form onSubmit={handleSubmit(submitForm)} className="space-y-4">
       {/* Email */}
-      <Field label="Email">
+      <Field label="Email" error={errors.email}>
         <input
+          {...register("email", { required: "Email is required" })}
           type="email"
           placeholder="Enter your email"
-          className={inputStyle}
+          className={`input-style ${errors.email ? "input-error" : ""}`}
         />
       </Field>
 
       {/* Password */}
-      <Field label="Password">
-        <input type="password" placeholder="••••••••" className={inputStyle} />
+      <Field label="Password" error={errors.password}>
+        <input
+          {...register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Your password must be at least 8 characters ",
+            },
+          })}
+          type="password"
+          placeholder="••••••••"
+          className={`input-style ${errors.password ? "input-error" : ""}`}
+        />
       </Field>
+
+      {errors?.root?.serverError && (
+        <p className="text-red-500 text-sm">
+          {errors.root.serverError.message}
+        </p>
+      )}
 
       {/* Forgot Password */}
       <div className="flex justify-end">
@@ -38,8 +111,8 @@ const LoginForm = () => {
 
       {/* Submit Button */}
       <div className="pt-2">
-        <button type="submit" className={buttonStyle}>
-          Sign In
+        <button disabled={isSubmitting} type="submit" className={buttonStyle}>
+          {isSubmitting ? "Signing in..." : "Login"}
         </button>
       </div>
 
