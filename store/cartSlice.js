@@ -140,6 +140,19 @@ const cartSlice = createSlice({
       .addCase(updateQuantity.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      // remove item
+      .addCase(removeFromCart.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(removeFromCart.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = state.items.filter((i) => i._id !== action.payload);
+      })
+      .addCase(removeFromCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
