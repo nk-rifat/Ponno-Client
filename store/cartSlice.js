@@ -14,8 +14,10 @@ export const loadCart = createAsyncThunk(
     try {
       const data = await getCartItems();
       return data.items;
-    } catch {
-      return rejectWithValue("Failed to load cart");
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to load cart",
+      );
     }
   },
 );
@@ -34,8 +36,10 @@ export const addToCart = createAsyncThunk(
         stock: product.stock,
         quantity: product.quantity || 1,
       };
-    } catch {
-      return rejectWithValue("Failed to add to cart");
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to add to cart",
+      );
     }
   },
 );
@@ -46,8 +50,10 @@ export const removeFromCart = createAsyncThunk(
     try {
       await deleteCartItem(productId);
       return productId;
-    } catch {
-      return rejectWithValue("Failed to remove item");
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to remove item",
+      );
     }
   },
 );
@@ -58,7 +64,7 @@ export const updateQuantity = createAsyncThunk(
     try {
       await saveCartItem(id, quantity);
       return { id, quantity };
-    } catch {
+    } catch (error) {
       return rejectWithValue("Failed to update quantity");
     }
   },
@@ -69,8 +75,10 @@ export const clearFullCart = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await clearCart();
-    } catch {
-      return rejectWithValue("Failed to clear cart");
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to clear cart",
+      );
     }
   },
 );
@@ -96,6 +104,7 @@ const cartSlice = createSlice({
       // loadCart
       .addCase(loadCart.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(loadCart.fulfilled, (state, action) => {
         state.items = action.payload;
@@ -108,11 +117,9 @@ const cartSlice = createSlice({
 
       // addToCart
       .addCase(addToCart.pending, (state) => {
-        state.loading = true;
         state.error = null;
       })
       .addCase(addToCart.fulfilled, (state, action) => {
-        state.loading = false;
         const existing = state.items.find((i) => i._id === action.payload._id);
         if (existing) {
           existing.quantity += action.payload.quantity;
@@ -121,18 +128,11 @@ const cartSlice = createSlice({
         }
       })
       .addCase(addToCart.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.payload;
       })
 
       // updateQuantity
-
-      .addCase(updateQuantity.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(updateQuantity.fulfilled, (state, action) => {
-        state.loading = false;
         const { id, quantity } = action.payload;
 
         const item = state.items.find((i) => i._id === id);
@@ -141,33 +141,22 @@ const cartSlice = createSlice({
         }
       })
       .addCase(updateQuantity.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.payload;
       })
 
       // remove item
-      .addCase(removeFromCart.pending, (state) => {
-        state.loading = true;
-      })
       .addCase(removeFromCart.fulfilled, (state, action) => {
-        state.loading = false;
         state.items = state.items.filter((i) => i._id !== action.payload);
       })
       .addCase(removeFromCart.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.payload;
       })
 
       // clear cart
-      .addCase(clearFullCart.pending, (state) => {
-        state.loading = true;
-      })
       .addCase(clearFullCart.fulfilled, (state) => {
-        state.loading = false;
         state.items = [];
       })
       .addCase(clearFullCart.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.payload;
       });
   },
