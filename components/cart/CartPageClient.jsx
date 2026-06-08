@@ -100,7 +100,7 @@ const CartPageClient = () => {
               <button
                 onClick={() => handleQtyChange(item._id, item.quantity - 1)}
                 disabled={item.quantity <= 1}
-                className="w-8 h-8 border rounded-lg text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-10 h-10 border rounded-lg hover:bg-green-400 disabled:opacity-20 disabled:cursor-not-allowed"
               >
                 -
               </button>
@@ -110,7 +110,7 @@ const CartPageClient = () => {
               <button
                 onClick={() => handleQtyChange(item._id, item.quantity + 1)}
                 disabled={item.quantity >= item.stock}
-                className="w-8 h-8 border rounded-lg text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-10 h-10 border rounded-lg hover:bg-green-400 disabled:opacity-20 disabled:cursor-not-allowed "
               >
                 +
               </button>

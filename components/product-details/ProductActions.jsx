@@ -10,17 +10,12 @@ const ProductActions = ({ product }) => {
 
   const stock = product?.stock || 0;
 
+  const isDecrementDisabled = stock <= 1 || qty <= 1;
+  const isIncrementDisabled = stock <= 1 || qty >= stock;
+
   const dispatch = useDispatch();
   const inCart = useSelector(isInCart(product._id));
 
-  const handleIncDec = () => {
-    if (qty < stock) {
-      setQty(qty + 1);
-    } else {
-      qty > 1;
-      setQty(qty - 1);
-    }
-  };
   const increase = () => {
     if (qty < stock) setQty(qty + 1);
   };
@@ -40,7 +35,8 @@ const ProductActions = ({ product }) => {
       <div className="flex items-center gap-4">
         <button
           onClick={decrease}
-          className="w-10 h-10 border rounded-lg hover:bg-green-400"
+          disabled={isDecrementDisabled}
+          className="w-10 h-10 border rounded-lg hover:bg-green-400 disabled:opacity-20 disabled:cursor-not-allowed"
         >
           -
         </button>
@@ -49,7 +45,8 @@ const ProductActions = ({ product }) => {
 
         <button
           onClick={increase}
-          className="w-10 h-10 border rounded-lg hover:bg-green-400"
+          disabled={isIncrementDisabled}
+          className="w-10 h-10 border rounded-lg hover:bg-green-400 disabled:opacity-20 disabled:cursor-not-allowed "
         >
           +
         </button>
