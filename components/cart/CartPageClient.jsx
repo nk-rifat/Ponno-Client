@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  selectCartItems,
-  selectCartTotalQty,
-  selectCartTotal,
+  cartItems,
+  totalItemQty,
+  totalPrice,
   removeFromCart,
   updateQuantity,
   clearFullCart,
@@ -16,9 +16,9 @@ import { useEffect } from "react";
 
 const CartPageClient = () => {
   const dispatch = useDispatch();
-  const items = useSelector(selectCartItems);
-  const totalQty = useSelector(selectCartTotalQty);
-  const total = useSelector(selectCartTotal);
+  const items = useSelector(cartItems);
+  const totalQty = useSelector(totalItemQty);
+  const total = useSelector(totalPrice);
 
   const handleQtyChange = (id, quantity) => {
     if (quantity < 1) return;

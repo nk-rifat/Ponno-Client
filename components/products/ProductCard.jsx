@@ -1,5 +1,5 @@
 "use client";
-import { addToCart, selectIsInCart } from "@/store/cartSlice";
+import { addToCart, isInCart } from "@/store/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { FaHeart, FaStar } from "react-icons/fa";
@@ -9,10 +9,10 @@ const ProductCard = ({ product }) => {
   const { _id, images, productName, discountPrice, price, stock } = product;
 
   const dispatch = useDispatch();
-  const isInCart = useSelector(selectIsInCart(_id));
+  const inCart = useSelector(isInCart(_id));
 
   const handleAddToCart = () => {
-    if (isInCart) return;
+    if (inCart) return;
     dispatch(addToCart({ ...product, quantity: 1 }));
   };
 
@@ -84,7 +84,7 @@ const ProductCard = ({ product }) => {
           >
             Stock Out
           </button>
-        ) : isInCart ? (
+        ) : inCart ? (
           <Link
             href="/cart"
             className="block w-full text-center bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg font-medium transition-colors"

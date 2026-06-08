@@ -1,6 +1,6 @@
 "use client";
 
-import { addToCart, selectIsInCart } from "@/store/cartSlice";
+import { addToCart, isInCart } from "@/store/cartSlice";
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ const ProductActions = ({ product }) => {
   const stock = product?.stock || 0;
 
   const dispatch = useDispatch();
-  const isInCart = useSelector(selectIsInCart(product._id));
+  const inCart = useSelector(isInCart(product._id));
 
   const increase = () => {
     if (qty < stock) setQty(qty + 1);
@@ -22,7 +22,7 @@ const ProductActions = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    if (isInCart) return;
+    if (inCart) return;
     dispatch(addToCart({ ...product, quantity: qty }));
   };
 
@@ -55,7 +55,7 @@ const ProductActions = ({ product }) => {
         >
           Stock Out
         </button>
-      ) : isInCart ? (
+      ) : inCart ? (
         <Link
           href="/cart"
           className="block w-full text-center py-3 rounded-lg text-white font-semibold bg-emerald-700 hover:bg-emerald-800 transition-colors"

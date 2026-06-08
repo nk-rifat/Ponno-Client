@@ -175,25 +175,23 @@ const cartSlice = createSlice({
 
 // ─── Selectors
 
-export const selectCartItems = (state) => state.cart.items;
+export const cartItems = (state) => state.cart.items;
 
-export const selectCartLoading = (state) => state.cart.loading;
+export const uniqueItemQty = (state) => state.cart.items.length;
 
-export const selectCartCount = (state) => state.cart.items.length;
-
-export const selectCartTotalQty = (state) =>
+export const totalItemQty = (state) =>
   state.cart.items.reduce((sum, i) => sum + i.quantity, 0);
 
-export const selectCartTotal = (state) =>
+export const totalPrice = (state) =>
   state.cart.items.reduce(
     (sum, i) => sum + (i.discountPrice || i.price) * i.quantity,
     0,
   );
 
-export const selectIsInCart = (id) => (state) =>
+export const isInCart = (id) => (state) =>
   state.cart.items.some((i) => i._id === id);
 
-export const selectCartItemQty = (id) => (state) =>
+export const cartItemQty = (id) => (state) =>
   state.cart.items.find((i) => i._id === id)?.quantity ?? 0;
 
 export const { resetCart } = cartSlice.actions;

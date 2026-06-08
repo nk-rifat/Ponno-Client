@@ -1,12 +1,12 @@
 "use client";
 
-import { selectCartTotalQty } from "@/store/cartSlice";
+import { uniqueItemQty } from "@/store/cartSlice";
 import Link from "next/link";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 export const NavActions = () => {
-  const cartCount = useSelector(selectCartTotalQty);
+  const cartCount = useSelector(uniqueItemQty);
   return (
     <>
       {/* Wishlist */}
