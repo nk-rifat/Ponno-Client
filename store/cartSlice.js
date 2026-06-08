@@ -6,7 +6,9 @@ import {
   deleteCartItem,
   clearCart,
 } from "@/lib/api/cart";
+import Loading from "@/app/loading";
 
+// Thunks
 export const loadCart = createAsyncThunk(
   "cart/loadCart",
   async (_, { rejectWithValue }) => {
@@ -62,3 +64,24 @@ export const clearFullCart = createAsyncThunk(
     }
   },
 );
+
+// Slice
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    items: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    resetCart: (state) => {
+      state.items = [];
+      state.loading = false;
+      state.error = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+  }
+});
