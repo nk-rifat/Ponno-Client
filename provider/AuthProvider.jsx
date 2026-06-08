@@ -1,11 +1,14 @@
-"use client"
+"use client";
 import { AuthContext } from "@/context";
 import axiosInstance from "@/lib/axiosInstance";
+import { loadCart } from "@/store/cartSlice";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   // restore session on app load
 
@@ -22,6 +25,12 @@ const AuthProvider = ({ children }) => {
     };
     restoreSession();
   }, []);
+
+  useEffect(() => {
+    if (user?.isVerified) {
+      dispatch(loadCart());
+    }
+  }, [user, dispatch]);
 
   // Login
   const login = async ({ email, password }) => {

@@ -33,10 +33,6 @@ const CartPageClient = () => {
     dispatch(clearFullCart());
   };
 
-  useEffect(() => {
-    dispatch(loadCart());
-  }, [dispatch]);
-
   if (items.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
