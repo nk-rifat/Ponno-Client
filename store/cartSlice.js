@@ -6,7 +6,6 @@ import {
   deleteCartItem,
   clearCart,
 } from "@/lib/api/cart";
-import Loading from "@/app/loading";
 
 // Thunks
 export const loadCart = createAsyncThunk(
