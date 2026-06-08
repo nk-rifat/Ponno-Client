@@ -25,7 +25,6 @@ export const addToCart = createAsyncThunk(
   async (product, { rejectWithValue }) => {
     try {
       await saveCartItem(product._id, product.quantity || 1);
-
       return {
         _id: product._id,
         productName: product.productName,
@@ -112,8 +111,14 @@ const cartSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(addToCart.fulfilled, (state) => {
+      .addCase(addToCart.fulfilled, (state, action) => {
         state.loading = false;
+        const existing = state.items.find((i) => i._id === action.payload._id);
+        if (existing) {
+          existing.quantity += action.payload.quantity;
+        } else {
+          state.items.push(action.payload);
+        }
       })
       .addCase(addToCart.rejected, (state, action) => {
         state.loading = false;

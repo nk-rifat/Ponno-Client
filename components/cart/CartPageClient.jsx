@@ -9,8 +9,10 @@ import {
   removeFromCart,
   updateQuantity,
   clearFullCart,
+  loadCart,
 } from "@/store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const CartPageClient = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,10 @@ const CartPageClient = () => {
   const handleClearCart = () => {
     dispatch(clearFullCart());
   };
+
+  useEffect(() => {
+    dispatch(loadCart());
+  }, [dispatch]);
 
   if (items.length === 0) {
     return (

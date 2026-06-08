@@ -1,9 +1,20 @@
+"use client";
+import { addToCart, selectIsInCart } from "@/store/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { FaHeart, FaStar } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = ({ product }) => {
   const { _id, images, productName, discountPrice, price, stock } = product;
+
+  const dispatch = useDispatch();
+  const isInCart = useSelector(selectIsInCart(_id));
+
+  const handleAddToCart = () => {
+    if (isInCart) return;
+    dispatch(addToCart({ ...product, quantity: 1 }));
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
@@ -73,8 +84,18 @@ const ProductCard = ({ product }) => {
           >
             Stock Out
           </button>
+        ) : isInCart ? (
+          <Link
+            href="/cart"
+            className="block w-full text-center bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg font-medium transition-colors"
+          >
+            View in Cart
+          </Link>
         ) : (
-          <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium">
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium"
+          >
             Add to Cart
           </button>
         )}
