@@ -1,6 +1,7 @@
 import AuthProvider from "@/provider/AuthProvider";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import ReduxProvider from "@/provider/ReduxProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,10 +17,12 @@ export default function RootLayout({ children, modal }) {
       </head>
 
       <body>
-        <AuthProvider>
-          {children}
-          {modal}
-        </AuthProvider>
+        <ReduxProvider>
+          <AuthProvider>
+            {children}
+            {modal}
+          </AuthProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
