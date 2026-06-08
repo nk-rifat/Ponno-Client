@@ -118,8 +118,28 @@ const cartSlice = createSlice({
       .addCase(addToCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
 
-    // updateQuantity
+      // updateQuantity
+
+      .addCase(updateQuantity.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateQuantity.fulfilled, (state, action) => {
+        state.loading = false;
+        const { id, quantity } = action.payload;
+
+        const item = state.items.find((i) => {
+          i._id === id;
+        });
+        if (item) {
+          item.quantity = quantity;
+        }
+      })
+      .addCase(updateQuantity.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
