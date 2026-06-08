@@ -39,3 +39,15 @@ export const addToCart = createAsyncThunk(
     }
   },
 );
+
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async (productId, { rejectWithValue }) => {
+    try {
+      await deleteCartItem(productId);
+      return productId;
+    } catch {
+      return rejectWithValue("Failed to remove item");
+    }
+  },
+);
