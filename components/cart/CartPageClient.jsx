@@ -2,8 +2,35 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import {
+  selectCartItems,
+  selectCartTotalQty,
+  selectCartTotal,
+  removeFromCart,
+  updateQuantity,
+  clearFullCart,
+} from "@/store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartPageClient = () => {
+  const dispatch = useDispatch();
+  const items = useSelector(selectCartItems);
+  const totalQty = useSelector(selectCartTotalQty);
+  const total = useSelector(selectCartTotal);
+
+  const handleQtyChange = (id, quantity) => {
+    if (quantity < 1) return;
+    dispatch(updateQuantity({ id, quantity }));
+  };
+
+  const handleRemove = (productId) => {
+    dispatch(removeFromCart(productId));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearFullCart());
+  };
+
   if (items.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
@@ -28,7 +55,10 @@ const CartPageClient = () => {
             ({totalQty} {totalQty === 1 ? "item" : "items"})
           </span>
         </h1>
-        <button className="text-sm text-red-500 hover:underline">
+        <button
+          onClick={handleClearCart}
+          className="text-sm text-red-500 hover:underline"
+        >
           Clear all
         </button>
       </div>
@@ -68,6 +98,7 @@ const CartPageClient = () => {
             {/* Quantity controls */}
             <div className="flex items-center gap-2">
               <button
+                onClick={() => handleQtyChange(item._id, item.quantity - 1)}
                 disabled={item.quantity <= 1}
                 className="w-8 h-8 border rounded-lg text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
               >
@@ -93,6 +124,7 @@ const CartPageClient = () => {
 
             {/* Remove */}
             <button
+              onClick={() => handleRemove(item._id)}
               className="text-gray-400 hover:text-red-500 transition-colors ml-2"
               aria-label="Remove item"
             >
