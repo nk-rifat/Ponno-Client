@@ -51,3 +51,14 @@ export const removeFromCart = createAsyncThunk(
     }
   },
 );
+
+export const clearFullCart = createAsyncThunk(
+  "cart/clearCart",
+  async (_, { rejectWithValue }) => {
+    try {
+      await clearCart();
+    } catch {
+      return rejectWithValue("Failed to clear cart");
+    }
+  },
+);
