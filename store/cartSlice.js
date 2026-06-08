@@ -94,6 +94,19 @@ const cartSlice = createSlice({
       .addCase(loadCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      // addToCart
+      .addCase(addToCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addToCart.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(addToCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
