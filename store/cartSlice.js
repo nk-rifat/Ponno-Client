@@ -169,3 +169,29 @@ const cartSlice = createSlice({
       });
   },
 });
+
+// ─── Selectors
+
+export const selectCartItems = (state) => state.cart.items;
+
+export const selectCartLoading = (state) => state.cart.loading;
+
+export const selectCartCount = (state) => state.cart.items.length;
+
+export const selectCartTotalQty = (state) =>
+  state.cart.items.reduce((sum, i) => sum + i.quantity, 0);
+
+export const selectCartTotal = (state) =>
+  state.cart.items.reduce(
+    (sum, i) => sum + (i.discountPrice || i.price) * i.quantity,
+    0,
+  );
+
+export const selectIsInCart = (id) => (state) =>
+  state.cart.items.some((i) => i._id === id);
+
+export const selectCartItemQty = (id) => (state) =>
+  state.cart.items.find((i) => i._id === id)?.quantity ?? 0;
+
+export const { resetCart } = cartSlice.actions;
+export default cartSlice.reducer;
