@@ -13,6 +13,14 @@ const ProductActions = ({ product }) => {
   const dispatch = useDispatch();
   const inCart = useSelector(isInCart(product._id));
 
+  const handleIncDec = () => {
+    if (qty < stock) {
+      setQty(qty + 1);
+    } else {
+      qty > 1;
+      setQty(qty - 1);
+    }
+  };
   const increase = () => {
     if (qty < stock) setQty(qty + 1);
   };

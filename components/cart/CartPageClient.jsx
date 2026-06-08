@@ -1,5 +1,5 @@
 "use client";
-
+import { FaTrashCan } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,10 +9,8 @@ import {
   removeFromCart,
   updateQuantity,
   clearFullCart,
-  loadCart,
 } from "@/store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const CartPageClient = () => {
   const dispatch = useDispatch();
@@ -54,7 +52,7 @@ const CartPageClient = () => {
         <h1 className="text-2xl font-bold">
           Your Cart{" "}
           <span className="text-base font-normal text-gray-500">
-            ({totalQty} {totalQty === 1 ? "item" : "items"})
+            ({items.length} {items.length === 1 ? "item" : "items"})
           </span>
         </h1>
         <button
@@ -127,10 +125,9 @@ const CartPageClient = () => {
             {/* Remove */}
             <button
               onClick={() => handleRemove(item._id)}
-              className="text-gray-400 hover:text-red-500 transition-colors ml-2"
-              aria-label="Remove item"
+              className="text-red-400 hover:text-red-600 transition-colors ml-2"
             >
-              ✕
+              <FaTrashCan />
             </button>
           </li>
         ))}
