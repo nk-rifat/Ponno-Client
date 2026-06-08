@@ -58,6 +58,7 @@ export const updateQuantity = createAsyncThunk(
   async ({ id, quantity }, { rejectWithValue }) => {
     try {
       await saveCartItem(id, quantity);
+      return { id, quantity };
     } catch {
       return rejectWithValue("Failed to update quantity");
     }
@@ -129,9 +130,7 @@ const cartSlice = createSlice({
         state.loading = false;
         const { id, quantity } = action.payload;
 
-        const item = state.items.find((i) => {
-          i._id === id;
-        });
+        const item = state.items.find((i) => i._id === id);
         if (item) {
           item.quantity = quantity;
         }
@@ -155,14 +154,14 @@ const cartSlice = createSlice({
       })
 
       // clear cart
-      .addCase(clearCart.pending, (state) => {
+      .addCase(clearFullCart.pending, (state) => {
         state.loading = true;
       })
-      .addCase(clearCart.fulfilled, (state) => {
+      .addCase(clearFullCart.fulfilled, (state) => {
         state.loading = false;
         state.items = [];
       })
-      .addCase(clearCart.rejected, (state, action) => {
+      .addCase(clearFullCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
