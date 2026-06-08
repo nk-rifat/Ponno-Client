@@ -54,6 +54,17 @@ export const removeFromCart = createAsyncThunk(
   },
 );
 
+export const updateQuantity = createAsyncThunk(
+  "cart/updateQuantity",
+  async ({ id, quantity }, { rejectWithValue }) => {
+    try {
+      await saveCartItem(id, quantity);
+    } catch {
+      return rejectWithValue("Failed to update quantity");
+    }
+  },
+);
+
 export const clearFullCart = createAsyncThunk(
   "cart/clearCart",
   async (_, { rejectWithValue }) => {
@@ -108,5 +119,7 @@ const cartSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
+
+    // updateQuantity
   },
 });
