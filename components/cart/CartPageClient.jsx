@@ -26,6 +26,22 @@ const CartPageClient = () => {
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      title: "Product removed from cart",
+      icon: "info",
+      iconColor: "#EF4444",
+      customClass: {
+        popup:
+          "!bg-white !rounded-xl !shadow-md !border !border-zinc-100 dark:!border-zinc-800",
+        title: "text-sm font-medium text-zinc-800",
+        timerProgressBar: "!bg-red-400 !h-[2px]",
+      },
+    });
   };
 
   const handleClearCart = () => {
