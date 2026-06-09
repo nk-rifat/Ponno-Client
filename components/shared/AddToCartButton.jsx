@@ -1,16 +1,24 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
 import { addToCart, isInCart } from "@/store/cartSlice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const AddToCartButton = ({ product, quantity = 1, className = "" }) => {
+  const { user } = useAuth();
+  const router = useRouter();
   const dispatch = useDispatch();
   const inCart = useSelector(isInCart(product._id));
 
   const handleAddToCart = () => {
-    if (inCart) return;
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
     dispatch(addToCart({ ...product, quantity }));
     Swal.fire({
       toast: true,
