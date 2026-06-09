@@ -37,36 +37,27 @@ const LoginForm = ({ onSuccess }) => {
           timer: 1000,
           showConfirmButton: false,
         });
+        reset();
         onSuccess?.();
         const params = new URLSearchParams(window.location.search);
         const next = params.get("next") || "/";
 
         router.push(next);
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Login Failed",
-          text: res?.data?.message || "Please try again",
-        });
       }
     } catch (err) {
+      const message = err.response?.data?.message || "Something went wrong.";
       // React Hook Form server error
       setError("root.serverError", {
         type: "server",
-        message:
-          err.response?.data?.message ||
-          "Something went wrong. Please try again.",
+        message,
       });
 
       Swal.fire({
         icon: "error",
-        title: "Error",
-        text:
-          err.response?.data?.message ||
-          "Something went wrong. Please try again.",
+        title: "Login Failed",
+        text: message,
       });
     }
-    reset();
   };
   return (
     <form onSubmit={handleSubmit(submitForm)} className="space-y-4">
