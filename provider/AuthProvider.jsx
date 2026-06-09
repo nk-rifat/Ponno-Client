@@ -1,7 +1,7 @@
 "use client";
 import { AuthContext } from "@/context";
 import axiosInstance from "@/lib/axiosInstance";
-import { loadCart } from "@/store/cartSlice";
+import { loadCart, resetCart } from "@/store/cartSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -49,6 +49,7 @@ const AuthProvider = ({ children }) => {
       await axiosInstance.post("/api/auth/logout");
     } finally {
       setUser(null);
+      dispatch(resetCart());
     }
   };
 
