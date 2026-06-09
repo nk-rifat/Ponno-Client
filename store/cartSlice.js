@@ -12,8 +12,7 @@ export const loadCart = createAsyncThunk(
   "cart/loadCart",
   async (_, { rejectWithValue }) => {
     try {
-      const data = await getCartItems();
-      return data.items;
+      return await getCartItems();
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to load cart",
@@ -65,7 +64,9 @@ export const updateQuantity = createAsyncThunk(
       await saveCartItem(id, quantity);
       return { id, quantity };
     } catch (error) {
-      return rejectWithValue("Failed to update quantity");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to update quantity",
+      );
     }
   },
 );
