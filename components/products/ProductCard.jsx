@@ -4,20 +4,24 @@ import Link from "next/link";
 import { FaHeart, FaStar } from "react-icons/fa";
 import AddToCartButton from "../shared/AddToCartButton";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleWishlist } from "@/lib/api/wishlist";
+import { isWishlist, toggleFav } from "@/store/wishlistSlice";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ product }) => {
   const { _id, images, productName, discountPrice, price, stock } = product;
   const dispatch = useDispatch();
+  const { user } = useAuth();
+  const router = useRouter();
 
   const isInWishlist = useSelector(isWishlist(_id));
 
   const handleToggleWishlist = () => {
-    if (!user?.isVerified) {
+    if (!user) {
       router.push("/login");
       return;
     }
-    dispatch(toggleWishlist(product));
+    dispatch(toggleFav(product));
   };
 
   return (
