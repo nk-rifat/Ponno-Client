@@ -1,28 +1,11 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { FaHeart, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import AddToCartButton from "../shared/AddToCartButton";
-import { useDispatch, useSelector } from "react-redux";
-import { isWishlist, toggleFav } from "@/store/wishlistSlice";
-import { useAuth } from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
+import AddToWishlistButton from "../shared/AddToFavButton";
 
 const ProductCard = ({ product }) => {
   const { _id, images, productName, discountPrice, price, stock } = product;
-  const dispatch = useDispatch();
-  const { user } = useAuth();
-  const router = useRouter();
-
-  const isInWishlist = useSelector(isWishlist(_id));
-
-  const handleToggleWishlist = () => {
-    if (!user) {
-      router.push("/login");
-      return;
-    }
-    dispatch(toggleFav(product));
-  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
@@ -41,14 +24,11 @@ const ProductCard = ({ product }) => {
         </Link>
 
         {/* Wishlist */}
-        <button
-          onClick={handleToggleWishlist}
-          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md z-10"
-        >
-          <FaHeart
-            className={isInWishlist ? "text-red-500" : "text-gray-300"}
-          />
-        </button>
+        <AddToWishlistButton
+          product={product}
+          iconOnly={true}
+          className="absolute top-3 right-3 z-10"
+        />
 
         {stock > 0 && stock < 5 && (
           <div className="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm z-10">

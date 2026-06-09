@@ -2,6 +2,7 @@
 import { AuthContext } from "@/context";
 import axiosInstance from "@/lib/axiosInstance";
 import { loadCart, resetCart } from "@/store/cartSlice";
+import { loadWishlist, resetWishlist } from "@/store/wishlistSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -29,6 +30,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (user?.isVerified) {
       dispatch(loadCart());
+      dispatch(loadWishlist());
     }
   }, [user, dispatch]);
 
@@ -50,6 +52,7 @@ const AuthProvider = ({ children }) => {
     } finally {
       setUser(null);
       dispatch(resetCart());
+      dispatch(resetWishlist());
     }
   };
 

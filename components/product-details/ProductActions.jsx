@@ -4,12 +4,12 @@ import { isInCart } from "@/store/cartSlice";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import AddToCartButton from "../shared/AddToCartButton";
+import AddToWishlistButton from "../shared/AddToFavButton";
 
 const ProductActions = ({ product }) => {
   const [qty, setQty] = useState(1);
 
   const stock = product?.stock || 0;
-
   const inCart = useSelector(isInCart(product._id));
 
   const isDecrementDisabled = inCart || stock <= 1 || qty <= 1;
@@ -18,7 +18,6 @@ const ProductActions = ({ product }) => {
   const increase = () => {
     if (qty < stock) setQty(qty + 1);
   };
-
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
   };
@@ -61,12 +60,7 @@ const ProductActions = ({ product }) => {
         Buy Now
       </button>
       {/* Fav Button */}
-      <button
-        disabled={stock === 0}
-        className="w-full py-3 rounded-lg border border-gray-400 text-gray-700 font-semibold hover:bg-green-50 hover:border-green-600 hover:text-green-600"
-      >
-        Add to Favorite
-      </button>
+      <AddToWishlistButton product={product} className="w-full py-3 text-sm" />
     </div>
   );
 };
