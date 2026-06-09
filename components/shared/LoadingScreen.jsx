@@ -1,4 +1,4 @@
-export default function Loading() {
+export default function LoadingScreen({ pageName = "" }) {
   return (
     <main className="relative min-h-screen overflow-hidden bg-base-100">
       {/* Background blur orbs */}
@@ -25,10 +25,11 @@ export default function Loading() {
           <div className="h-px w-12 bg-base-300" />
         </div>
 
-        {/* Text */}
+        {/* Dynamic Text */}
         <h2 className="text-xl font-bold text-base-content">Hang tight...</h2>
         <p className="mt-2 text-sm text-base-content/50">
-          We&apos;re loading the page for you.
+          We are loading the <span className="capitalize">{pageName}</span> page
+          for you.
         </p>
       </div>
     </main>
