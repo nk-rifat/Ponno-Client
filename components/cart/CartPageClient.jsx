@@ -12,6 +12,7 @@ import {
 } from "@/store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { FaShoppingCart } from "react-icons/fa";
 
 const CartPageClient = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ const CartPageClient = () => {
   if (items.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+        <FaShoppingCart className="text-gray-200 text-6xl mx-auto mb-4" />
         <p className="text-gray-500 text-lg mb-4">Your cart is empty.</p>
         <Link
           href="/products"

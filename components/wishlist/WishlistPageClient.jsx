@@ -11,16 +11,18 @@ const WishlistPageClient = () => {
   const dispatch = useDispatch();
   const items = useSelector(wishlistItems);
   const allCartItems = useSelector(cartItems);
-
+  // remove from cart
   const handleRemove = (item) => {
     dispatch(toggleFav(item));
   };
 
+  // add to cart
   const handleAddToCart = (item) => {
     dispatch(addToCart({ ...item, quantity: 1 }));
     dispatch(toggleFav(item));
   };
 
+  // If no products
   if (items.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
@@ -59,14 +61,14 @@ const WishlistPageClient = () => {
       </div>
 
       {/* Wishlist Items List */}
-      <div className="divide-y divide-gray-100">
+      <div className="space-y-4">
         {items.map((item) => {
           const isInCart = allCartItems.some((c) => c._id === item._id);
 
           return (
             <div
               key={item._id}
-              className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center py-6 px-4 hover:bg-gray-50/50 transition-colors"
+              className="grid grid-cols-1 md:grid-cols-12 items-center py-6 px-4 hover:bg-gray-50/50 transition-colors gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100"
             >
               {/* Column 1: Image & Name */}
               <div className="col-span-1 md:col-span-6 flex items-center gap-4">
