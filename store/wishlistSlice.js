@@ -15,3 +15,17 @@ export const loadWishlist = createAsyncThunk(
     }
   },
 );
+
+export const toggleFav = createAsyncThunk(
+  "wishlist/toggleWishlist",
+  async (product, { rejectWithValue }) => {
+    try {
+      await toggleWishlist(product._id);
+      return product;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to update wishlist",
+      );
+    }
+  },
+);
