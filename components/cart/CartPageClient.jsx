@@ -11,6 +11,7 @@ import {
   clearFullCart,
 } from "@/store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const CartPageClient = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,20 @@ const CartPageClient = () => {
   };
 
   const handleClearCart = () => {
-    dispatch(clearFullCart());
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will lose all the items currently in your cart!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, Delete All!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(clearFullCart());
+      }
+    });
   };
 
   if (items.length === 0) {
@@ -85,14 +99,6 @@ const CartPageClient = () => {
               <p className="font-semibold text-emerald-900 truncate">
                 {item.productName}
               </p>
-              <p className="text-sm text-green-600 font-medium mt-0.5">
-                TK {item.discountPrice || item.price}
-              </p>
-              {item.discountPrice && (
-                <p className="text-xs text-gray-400 line-through">
-                  TK {item.price}
-                </p>
-              )}
             </div>
 
             {/* Quantity controls */}
