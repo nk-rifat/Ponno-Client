@@ -74,7 +74,7 @@ const wishlistSlice = createSlice({
       })
 
       // toggleWishlist
-      .addCase(toggleWishlist.pending, (state, action) => {
+      .addCase(toggleFav.pending, (state, action) => {
         // optimistic — toggle instantly
         const product = action.meta.arg;
         const index = state.items.findIndex((i) => i._id === product._id);
@@ -91,22 +91,22 @@ const wishlistSlice = createSlice({
           });
         }
       })
-      .addCase(toggleWishlist.fulfilled, (state) => {
+      .addCase(toggleFav.fulfilled, (state) => {
         state.error = null;
       })
-      .addCase(toggleWishlist.rejected, (state, action) => {
+      .addCase(toggleFav.rejected, (state, action) => {
         state.error = action.payload;
       })
 
       // clearWishlist
-      .addCase(clearWishlist.pending, (state) => {
+      .addCase(clearAll.pending, (state) => {
         state.loading = true;
       })
-      .addCase(clearWishlist.fulfilled, (state) => {
+      .addCase(clearAll.fulfilled, (state) => {
         state.items = [];
         state.loading = false;
       })
-      .addCase(clearWishlist.rejected, (state, action) => {
+      .addCase(clearAll.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
