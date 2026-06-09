@@ -1,20 +1,11 @@
 "use client";
-import { addToCart, isInCart } from "@/store/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { FaHeart, FaStar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import AddToCartButton from "../shared/AddToCartButton";
 
 const ProductCard = ({ product }) => {
   const { _id, images, productName, discountPrice, price, stock } = product;
-
-  const dispatch = useDispatch();
-  const inCart = useSelector(isInCart(_id));
-
-  const handleAddToCart = () => {
-    if (inCart) return;
-    dispatch(addToCart({ ...product, quantity: 1 }));
-  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
@@ -77,28 +68,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Button */}
-        {stock === 0 ? (
-          <button
-            disabled
-            className="w-full bg-red-600 text-white font-medium py-2 rounded-lg cursor-not-allowed"
-          >
-            Stock Out
-          </button>
-        ) : inCart ? (
-          <Link
-            href="/cart"
-            className="block w-full text-center bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg font-medium transition-colors"
-          >
-            View in Cart
-          </Link>
-        ) : (
-          <button
-            onClick={handleAddToCart}
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium"
-          >
-            Add to Cart
-          </button>
-        )}
+        <AddToCartButton product={product} className="w-full py-2" />
       </div>
     </div>
   );

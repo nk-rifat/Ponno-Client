@@ -1,20 +1,19 @@
 "use client";
 
-import { addToCart, isInCart } from "@/store/cartSlice";
-import Link from "next/link";
+import { isInCart } from "@/store/cartSlice";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import AddToCartButton from "../shared/AddToCartButton";
 
 const ProductActions = ({ product }) => {
   const [qty, setQty] = useState(1);
 
   const stock = product?.stock || 0;
 
-  const isDecrementDisabled = stock <= 1 || qty <= 1;
-  const isIncrementDisabled = stock <= 1 || qty >= stock;
-
-  const dispatch = useDispatch();
   const inCart = useSelector(isInCart(product._id));
+
+  const isDecrementDisabled = inCart || stock <= 1 || qty <= 1;
+  const isIncrementDisabled = inCart || stock <= 1 || qty >= stock;
 
   const increase = () => {
     if (qty < stock) setQty(qty + 1);
@@ -22,11 +21,6 @@ const ProductActions = ({ product }) => {
 
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
-  };
-
-  const handleAddToCart = () => {
-    if (inCart) return;
-    dispatch(addToCart({ ...product, quantity: qty }));
   };
 
   return (
@@ -53,28 +47,11 @@ const ProductActions = ({ product }) => {
       </div>
 
       {/* Add to Cart */}
-      {stock === 0 ? (
-        <button
-          disabled
-          className="w-full py-3 rounded-lg text-white font-semibold bg-red-500 cursor-not-allowed"
-        >
-          Stock Out
-        </button>
-      ) : inCart ? (
-        <Link
-          href="/cart"
-          className="block w-full text-center py-3 rounded-lg text-white font-semibold bg-emerald-700 hover:bg-emerald-800 transition-colors"
-        >
-          View in Cart
-        </Link>
-      ) : (
-        <button
-          onClick={handleAddToCart}
-          className="w-full py-3 rounded-lg text-white font-semibold bg-green-600 hover:bg-green-700"
-        >
-          Add to Cart
-        </button>
-      )}
+      <AddToCartButton
+        product={product}
+        quantity={qty}
+        className="w-full py-3"
+      />
 
       {/* Buy Now */}
       <button
