@@ -29,3 +29,16 @@ export const toggleFav = createAsyncThunk(
     }
   },
 );
+
+export const clearAll = createAsyncThunk(
+  "wishlist/clearWishlist",
+  async (_, { rejectWithValue }) => {
+    try {
+      await clearWishlist();
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to clear wishlist",
+      );
+    }
+  },
+);
