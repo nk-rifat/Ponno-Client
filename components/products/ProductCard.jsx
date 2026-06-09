@@ -3,9 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaHeart, FaStar } from "react-icons/fa";
 import AddToCartButton from "../shared/AddToCartButton";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleWishlist } from "@/lib/api/wishlist";
 
 const ProductCard = ({ product }) => {
   const { _id, images, productName, discountPrice, price, stock } = product;
+  const dispatch = useDispatch();
+
+  const isInWishlist = useSelector(isWishlist(_id));
+
+  const handleToggleWishlist = () => {
+    if (!user?.isVerified) {
+      router.push("/login");
+      return;
+    }
+    dispatch(toggleWishlist(product));
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
@@ -24,8 +37,13 @@ const ProductCard = ({ product }) => {
         </Link>
 
         {/* Wishlist */}
-        <button className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md z-10">
-          <FaHeart className="text-gray-600" />
+        <button
+          onClick={handleToggleWishlist}
+          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md z-10"
+        >
+          <FaHeart
+            className={isInWishlist ? "text-red-500" : "text-gray-300"}
+          />
         </button>
 
         {stock > 0 && stock < 5 && (
