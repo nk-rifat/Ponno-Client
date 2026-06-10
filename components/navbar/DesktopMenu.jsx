@@ -101,11 +101,14 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
               }`}
             >
               {user?.profilePic ? (
-                <Image
-                  src={user?.profilePic}
-                  alt="Profile"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
-                />
+                <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-gray-200 hover:ring-gray-400 transition-all duration-200">
+                  <Image
+                    src={user?.profilePic}
+                    alt="Profile"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               ) : (
                 <div className="w-full h-full bg-emerald-800 flex items-center justify-center text-white font-bold text-base px-2 py-1.5 rounded-full  hover:bg-emerald-700 ">
                   {getInitial(fullName)}

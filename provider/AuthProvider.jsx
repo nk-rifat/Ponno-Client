@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const restoreSession = async () => {
       try {
-        const { data } = await axiosInstance.get("/api/auth/me");
+        const { data } = await axiosInstance.get("/api/user/me");
         setUser(data.user);
       } catch (error) {
         setUser(null);
@@ -56,11 +56,16 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUser = (updatedData) => {
+    setUser((prev) => ({ ...prev, ...updatedData }));
+  };
+
   const authInfo = {
     user,
     loading,
     login,
     logout,
+    updateUser,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -1,5 +1,11 @@
+import ProfilePageClient from "@/components/profile/ProfilePageClient";
+
 const ProfilePage = () => {
-  return <div>ProfilePage</div>;
+  return (
+    <>
+      <ProfilePageClient />
+    </>
+  );
 };
 
 export default ProfilePage;
