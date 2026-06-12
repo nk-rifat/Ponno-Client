@@ -3,7 +3,6 @@ import { FaTrashCan } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  cartItems,
   totalItemQty,
   totalPrice,
   removeFromCart,
@@ -13,12 +12,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { setCheckoutItems } from "@/store/checkoutSlice";
 
 const CartPageClient = () => {
   const dispatch = useDispatch();
-  const items = useSelector(cartItems);
+  const router = useRouter();
+
+  const items = useSelector((state) => state.cart.items);
   const totalQty = useSelector(totalItemQty);
   const total = useSelector(totalPrice);
+ 
 
   const handleQtyChange = (id, quantity) => {
     if (quantity < 1) return;
@@ -60,6 +64,12 @@ const CartPageClient = () => {
         dispatch(clearFullCart());
       }
     });
+  };
+
+  const handleProceedToCheckout = () => {
+    if (items.length === 0) return;
+    dispatch(setCheckoutItems({ items, source: "cart" }));
+    router.push("/checkout");
   };
 
   if (items.length === 0) {
@@ -172,7 +182,10 @@ const CartPageClient = () => {
           <span>TK {total.toFixed(0)}</span>
         </div>
 
-        <button className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors">
+        <button
+          onClick={handleProceedToCheckout}
+          className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors"
+        >
           Proceed to Checkout
         </button>
 

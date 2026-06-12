@@ -33,7 +33,7 @@ const ProductDetailsPage = async ({ params }) => {
         </nav>
 
         {/* Product Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-5 sm:mt-7 md:mt-10 lg:mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-5 sm:mt-7 md:mt-10 lg:mt-12">
           <ProductGallery images={product?.images} />
           <div>
             <ProductInfo product={product} />

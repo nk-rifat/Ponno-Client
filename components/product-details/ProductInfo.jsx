@@ -29,7 +29,7 @@ const ProductInfo = ({ product }) => {
 
         {discountPrice && (
           <span className="text-gray-400 line-through">
-            ৳{price}
+            Tk{price}
           </span>
         )}
       </div>

@@ -2,11 +2,15 @@
 
 import { isInCart } from "@/store/cartSlice";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddToCartButton from "../shared/AddToCartButton";
 import AddToWishlistButton from "../shared/AddToFavButton";
+import { setCheckoutItems } from "@/store/checkoutSlice";
+import { useRouter } from "next/navigation";
 
 const ProductActions = ({ product }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [qty, setQty] = useState(1);
 
   const stock = product?.stock || 0;
@@ -20,6 +24,24 @@ const ProductActions = ({ product }) => {
   };
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
+  };
+
+  const handleBuyNow = () => {
+    dispatch(
+      setCheckoutItems({
+        items: [
+          {
+            productId: product._id,
+            name: product.productName,
+            price: product.price,
+            discountPrice: product.discountPrice,
+            quantity: qty,
+          },
+        ],
+        source: "buyNow",
+      }),
+    );
+    router.push("/checkout");
   };
 
   return (
@@ -54,6 +76,7 @@ const ProductActions = ({ product }) => {
 
       {/* Buy Now */}
       <button
+        onClick={handleBuyNow}
         disabled={stock === 0}
         className="w-full py-3 rounded-lg border border-green-600 text-green-600 font-semibold hover:bg-green-50"
       >
