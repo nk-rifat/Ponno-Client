@@ -1,4 +1,4 @@
-import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
 const ProductInfo = ({ product }) => {
   if (!product) return null;

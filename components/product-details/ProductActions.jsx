@@ -32,7 +32,7 @@ const ProductActions = ({ product }) => {
         items: [
           {
             productId: product._id,
-            name: product.productName,
+            productName: product.productName,
             price: product.price,
             discountPrice: product.discountPrice,
             quantity: qty,

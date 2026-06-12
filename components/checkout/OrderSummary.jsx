@@ -26,7 +26,7 @@ const OrderSummary = ({
           >
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-emerald-800 truncate">
-                {item.name}
+                {item.productName}
               </p>
               <p className="text-xs text-slate-500 mt-1">
                 Tk {(item.discountPrice || item.price).toLocaleString()} ×{" "}
