@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Pagination({ totalPages }) {
+export default function Pagination({ totalPages, basePath }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -11,7 +11,7 @@ export default function Pagination({ totalPages }) {
   const changePage = (page) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", page);
-    router.push(`/products?${params.toString()}`);
+    router.push(`${basePath}?${params.toString()}`);
   };
 
   return (

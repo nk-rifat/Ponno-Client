@@ -126,7 +126,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
                   <FaUserCircle className="text-gray-400 text-lg" /> My Profile
                 </Link>
                 <Link
-                  href="/orders"
+                  href="/orders/my-orders"
                   className={menuItemClass}
                   onClick={closeUserMenu}
                 >

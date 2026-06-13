@@ -49,7 +49,7 @@ const ProductsPage = async ({ searchParams }) => {
               <ProductGrid products={products} />
 
               {/* Pagination */}
-              <Pagination totalPages={totalPages} />
+              <Pagination totalPages={totalPages} basePath="/products" />
             </div>
           </div>
         </div>

@@ -156,7 +156,7 @@ const CheckoutClientPage = () => {
           text: "We will review and confirm your order shortly.",
           confirmButtonText: "OK",
         });
-        router.push("/my-orders");
+        router.push("/orders/my-orders");
       }
     } catch (error) {
       const msg =
