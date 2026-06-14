@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { FaBars, FaTimes, FaUser, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaUser,
+  FaSignOutAlt,
+  FaBoxOpen,
+} from "react-icons/fa";
 import { NavActions } from "./ShopActions";
 import { CategoryLinks } from "./CategoryLinks";
 import { useState } from "react";
@@ -83,14 +89,27 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
           <hr className="border-gray-100" />
 
           <div className="grid grid-cols-2 gap-2">
-            <Link
-              href="/profile"
-              prefetch={false}
-              className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50"
-              onClick={() => setMenuOpen(false)}
-            >
-              <FaUser /> Profile
-            </Link>
+            {user?.isVerified ? (
+              <>
+                <Link
+                  href="/profile"
+                  prefetch={false}
+                  className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaUser /> Profile
+                </Link>
+                <Link
+                  href="/orders/my-orders"
+                  prefetch={false}
+                  className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaBoxOpen /> My Orders
+                </Link>
+              </>
+            ) : null}
+
             {user?.isVerified ? (
               <button
                 className="flex items-center justify-center gap-2 py-2.5 border border-red-100 text-red-600 bg-red-50/50 rounded-xl text-sm font-medium hover:bg-red-50"

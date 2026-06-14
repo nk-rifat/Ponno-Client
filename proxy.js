@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // Pages that require login
-const PROTECTED_ROUTES = ["/dashboard", "/profile", "/orders"];
+const PROTECTED_ROUTES = ["/dashboard", "/profile", "/orders" , "/checkout"];
 
 // Pages that logged-in users shouldn't see
 // If a logged-in user visits these, redirect them to dashboard.
