@@ -16,7 +16,7 @@ const LocationSelects = ({
       <div className="flex flex-col md:flex-row gap-4">
         {/* Division */}
         <div className="flex-1">
-          <label className="text-xs text-gray-500 mb-1.5 block">
+          <label className="text-sm text-gray-500 mb-1.5 block">
             Division <span className="text-red-400">*</span>
           </label>
           <select
@@ -39,7 +39,7 @@ const LocationSelects = ({
 
         {/* District / Zila */}
         <div className="flex-1">
-          <label className="text-xs text-gray-500 mb-1.5 block">
+          <label className="text-sm text-gray-500 mb-1.5 block">
             District <span className="text-red-400">*</span>
           </label>
           <select
@@ -64,7 +64,7 @@ const LocationSelects = ({
 
       {/* Upazila sits here - its row pairing with Address is handled in the parent form */}
       <div>
-        <label className="text-xs text-gray-500 mb-1.5 block">
+        <label className="text-sm text-gray-500 mb-1.5 block">
           Upazila <span className="text-red-400">*</span>
         </label>
         <select

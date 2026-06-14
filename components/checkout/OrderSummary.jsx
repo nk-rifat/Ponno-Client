@@ -12,7 +12,7 @@ const OrderSummary = ({
   return (
     <div className="space-y-5">
       {/* Section Header */}
-      <p className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest">
+      <p className="text-[14px] font-bold text-emerald-600 uppercase tracking-widest">
         Order summary
       </p>
 
@@ -71,7 +71,7 @@ const OrderSummary = ({
 
           {/* Grand Total */}
           <div className="flex justify-between text-base font-bold text-slate-900 pt-3 border-t border-slate-200/60">
-            <span>Total</span>
+            <span className="text-indigo-600">Total</span>
             <span className="text-indigo-600">
               Tk {(watchedDistrictName ? total : subtotal).toLocaleString()}
             </span>
@@ -81,7 +81,7 @@ const OrderSummary = ({
 
       {/* Delivery Note Input */}
       <div className="space-y-1.5">
-        <label className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest block">
+        <label className="text-[12px] font-bold text-emerald-600 uppercase tracking-widest block">
           Delivery note{" "}
           <span className="normal-case font-normal text-gray-500 italic">
             (optional)
@@ -91,7 +91,7 @@ const OrderSummary = ({
           {...register("note")}
           rows={3}
           placeholder="Any special instructions for your order?"
-          className="w-full border border-emerald-100 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 resize-none transition-all duration-200 focus:outline-none focus:border-emerald-600"
+          className="w-full bg-gray-50 border border-emerald-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 resize-none transition-all duration-200 focus:outline-none focus:border-emerald-600"
         />
       </div>
     </div>

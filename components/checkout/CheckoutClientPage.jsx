@@ -172,7 +172,7 @@ const CheckoutClientPage = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-emerald-800 mb-1">Checkout</h1>
+      <h1 className="text-2xl font-bold text-emerald-800 mb-1">Checkout</h1>
       <p className="text-sm text-gray-600 mb-6">
         Review your order and fill in delivery details
       </p>

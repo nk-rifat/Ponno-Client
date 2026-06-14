@@ -16,14 +16,14 @@ const DeliveryForm = ({
 }) => {
   return (
     <div>
-      <p className="text-xs font-medium text-emerald-600 uppercase tracking-wider mb-3">
+      <p className="text-[14px] font-bold text-emerald-600 uppercase tracking-wider mb-3">
         Delivery details
       </p>
       <div className="border border-emerald-100 rounded-xl bg-white p-5 space-y-4">
         {/* Name + Phone */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-gray-500 mb-1.5 block">
+            <label className="text-sm text-gray-500 mb-1.5 block">
               Full name <span className="text-red-400">*</span>
             </label>
             <input
@@ -40,7 +40,7 @@ const DeliveryForm = ({
           </div>
 
           <div>
-            <label className="text-xs text-gray-500 mb-1.5 block">
+            <label className="text-sm text-gray-500 mb-1.5 block">
               Phone <span className="text-red-400">*</span>
             </label>
             <input
@@ -79,7 +79,7 @@ const DeliveryForm = ({
 
         {/* Address */}
         <div>
-          <label className="text-xs text-gray-500 mb-1.5 block">
+          <label className="text-sm text-gray-500 mb-1.5 block">
             Union & village address <span className="text-red-400">*</span>
           </label>
           <input
@@ -125,7 +125,7 @@ const DeliveryForm = ({
         >
           {loading ? (
             <>
-              <span className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+              <span className="w-4 h-4 text-white font-bold text-2xl rounded-full animate-spin" />
               Placing order...
             </>
           ) : (
