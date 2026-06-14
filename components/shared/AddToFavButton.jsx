@@ -28,9 +28,9 @@ const AddToWishlistButton = ({ product, className = "", iconOnly = false }) => {
   const inWishlist = useSelector(isWishlist(product._id));
 
   const handleToggleWishlist = () => {
-    if (!user) return showWarningToast("Please login to add to cart");
+    if (!user) return showWarningToast("Please login to add to Fav");
     if (user.role === "admin")
-      return showWarningToast("Admins cannot add to cart");
+      return showWarningToast("Admins cannot add to Fav");
     dispatch(toggleFav(product));
 
     Swal.fire({
