@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { FaSignOutAlt, FaShoppingBag, FaUserCircle } from "react-icons/fa";
+import {
+  FaSignOutAlt,
+  FaShoppingBag,
+  FaUserCircle,
+  FaTachometerAlt,
+} from "react-icons/fa";
 import { SearchAction } from "./SearchAction";
 import { NavActions } from "./ShopActions";
 import { CategoryLinks } from "./CategoryLinks";
@@ -13,7 +18,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
   const { user, logout } = useAuth();
   const router = useRouter();
   const menuItemClass =
-    "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors";
+    "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-green-100 transition-colors";
 
   const fullName = `${user?.firstName} ${user?.lastName}`;
 
@@ -125,13 +130,26 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
                 >
                   <FaUserCircle className="text-gray-400 text-lg" /> My Profile
                 </Link>
-                <Link
-                  href="/orders/my-orders"
-                  className={menuItemClass}
-                  onClick={closeUserMenu}
-                >
-                  <FaShoppingBag className="text-gray-400 text-lg" /> My Orders
-                </Link>
+
+                {user.role === "admin" ? (
+                  <Link
+                    href="/admin/dashboard"
+                    className={menuItemClass}
+                    onClick={closeUserMenu}
+                  >
+                    <FaTachometerAlt className="text-gray-400 text-lg" />{" "}
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    href="/orders/my-orders"
+                    className={menuItemClass}
+                    onClick={closeUserMenu}
+                  >
+                    <FaShoppingBag className="text-gray-400 text-lg" /> My
+                    Orders
+                  </Link>
+                )}
 
                 <hr className="my-1 border-gray-100" />
                 <button

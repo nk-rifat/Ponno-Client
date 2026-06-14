@@ -7,6 +7,7 @@ import {
   FaUser,
   FaSignOutAlt,
   FaBoxOpen,
+  FaTachometerAlt,
 } from "react-icons/fa";
 import { NavActions } from "./ShopActions";
 import { CategoryLinks } from "./CategoryLinks";
@@ -94,33 +95,44 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
                 <Link
                   href="/profile"
                   prefetch={false}
-                  className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50"
+                  className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-green-100"
                   onClick={() => setMenuOpen(false)}
                 >
                   <FaUser /> Profile
                 </Link>
-                <Link
-                  href="/orders/my-orders"
-                  prefetch={false}
-                  className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <FaBoxOpen /> My Orders
-                </Link>
-              </>
-            ) : null}
 
-            {user?.isVerified ? (
-              <button
-                className="flex items-center justify-center gap-2 py-2.5 border border-red-100 text-red-600 bg-red-50/50 rounded-xl text-sm font-medium hover:bg-red-50"
-                onClick={handleLogOut}
-              >
-                <FaSignOutAlt /> Logout
-              </button>
+                {user.role === "admin" ? (
+                  <Link
+                    href="/admin/dashboard"
+                    prefetch={false}
+                    className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-green-100"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaTachometerAlt /> Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    href="/orders/my-orders"
+                    prefetch={false}
+                    className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-green-100"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaBoxOpen /> My Orders
+                  </Link>
+                )}
+
+                <button
+                  className="col-span-2 flex items-center justify-center gap-2 py-2.5 border border-red-100 text-red-600 bg-red-50/50 rounded-xl text-sm font-medium hover:bg-red-50"
+                  onClick={handleLogOut}
+                >
+                  <FaSignOutAlt /> Logout
+                </button>
+              </>
             ) : (
               <Link
                 href="/login"
-                className="flex items-center justify-center gap-2 py-2.5 border border-green-300 text-gray-800 bg-white/8 rounded-xl text-sm font-medium hover:bg-green-50"
+                className="col-span-2 flex items-center justify-center gap-2 py-2.5 border border-green-300 text-gray-800 bg-white/8 rounded-xl text-sm font-medium hover:bg-green-50"
+                onClick={() => setMenuOpen(false)}
               >
                 Login
               </Link>
