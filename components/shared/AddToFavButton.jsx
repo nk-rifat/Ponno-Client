@@ -2,24 +2,35 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import { isWishlist, toggleFav } from "@/store/wishlistSlice";
-
-import { useRouter } from "next/navigation";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
+const showWarningToast = (title) => {
+  Swal.fire({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    title,
+    background: "#ffffff",
+    color: "#18181b",
+    icon: "warning",
+    iconColor: "#d97706",
+  });
+};
+
 const AddToWishlistButton = ({ product, className = "", iconOnly = false }) => {
   const { user } = useAuth();
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const inWishlist = useSelector(isWishlist(product._id));
 
   const handleToggleWishlist = () => {
-    if (!user) {
-      router.push("/login");
-      return;
-    }
+    if (!user) return showWarningToast("Please login to add to cart");
+    if (user.role === "admin")
+      return showWarningToast("Admins cannot add to cart");
     dispatch(toggleFav(product));
 
     Swal.fire({

@@ -3,21 +3,33 @@
 import { useAuth } from "@/hooks/useAuth";
 import { addToCart, isInCart } from "@/store/cartSlice";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
+const showWarningToast = (title) => {
+  Swal.fire({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    title,
+    background: "#ffffff",
+    color: "#18181b",
+    icon: "warning",
+    iconColor: "#d97706",
+  });
+};
+
 const AddToCartButton = ({ product, quantity = 1, className = "" }) => {
   const { user } = useAuth();
-  const router = useRouter();
   const dispatch = useDispatch();
   const inCart = useSelector(isInCart(product._id));
 
   const handleAddToCart = () => {
-    if (!user) {
-      router.push("/login");
-      return;
-    }
+    if (!user) return showWarningToast("Please login to add to cart");
+    if (user.role === "admin")
+      return showWarningToast("Admins cannot add to cart");
 
     dispatch(addToCart({ ...product, quantity }));
     Swal.fire({
