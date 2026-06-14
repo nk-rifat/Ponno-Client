@@ -3,6 +3,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { addToCart, isInCart } from "@/store/cartSlice";
 import Link from "next/link";
+import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -71,9 +72,14 @@ const AddToCartButton = ({ product, quantity = 1, className = "" }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className={`bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg ${className}`}
+      className={`relative overflow-hidden bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-300 group ${className}`}
     >
-      Add to Cart
+      <span className="flex items-center justify-center transition-all duration-300 group-hover:-translate-y-8 group-hover:opacity-0">
+        Add to Cart
+      </span>
+      <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+        <FaShoppingCart className="text-xl" />
+      </span>
     </button>
   );
 };
