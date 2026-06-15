@@ -133,7 +133,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
 
                 {user.role === "admin" ? (
                   <Link
-                    href="/dashboard"
+                    href="/admin/dashboard"
                     className={menuItemClass}
                     onClick={closeUserMenu}
                   >

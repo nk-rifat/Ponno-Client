@@ -103,7 +103,7 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
 
                 {user.role === "admin" ? (
                   <Link
-                    href="/dashboard"
+                    href="/admin/dashboard"
                     prefetch={false}
                     className="flex items-center justify-center gap-2 py-2.5 border border-gray-200 text-gray-700 rounded-xl text-sm font-medium hover:bg-green-100"
                     onClick={() => setMenuOpen(false)}
