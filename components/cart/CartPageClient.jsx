@@ -1,35 +1,78 @@
 "use client";
-import { FaTrashCan } from "react-icons/fa6";
-import Image from "next/image";
+
+import { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Swal from "sweetalert2";
+import { FaShoppingCart } from "react-icons/fa";
+
 import {
   totalItemQty,
   totalPrice,
   removeFromCart,
   updateQuantity,
   clearFullCart,
+  loadCart,
 } from "@/store/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
-import { FaShoppingCart } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import { setCheckoutItems } from "@/store/checkoutSlice";
+import CartSummary from "./CartSummary";
+import CartItem from "./CartItem";
+const { saveCartItem } = await import("@/lib/api/cart");
 
 const CartPageClient = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    dispatch(loadCart());
+    setIsMounted(true);
+  }, [dispatch]);
 
   const items = useSelector((state) => state.cart.items);
+  const loading = useSelector((state) => state.cart.loading);
   const totalQty = useSelector(totalItemQty);
   const total = useSelector(totalPrice);
- 
+
+  const debounceTimeouts = useRef({});
 
   const handleQtyChange = (id, quantity) => {
     if (quantity < 1) return;
+
     dispatch(updateQuantity({ id, quantity }));
+
+    if (debounceTimeouts.current[id]) {
+      clearTimeout(debounceTimeouts.current[id]);
+    }
+
+    const newTimeout = setTimeout(async () => {
+      try {
+        await saveCartItem(id, quantity);
+      } catch (error) {
+        console.error("Debounced API sync failed:", error);
+        dispatch(loadCart());
+      }
+
+      delete debounceTimeouts.current[id];
+    }, 500);
+
+    debounceTimeouts.current[id] = newTimeout;
   };
 
+  // cleanup on unmount — ref is stable, no deps needed
+  useEffect(() => {
+    return () => {
+      Object.values(debounceTimeouts.current).forEach(clearTimeout);
+    };
+  }, []);
+
   const handleRemove = (productId) => {
+    if (debounceTimeouts.current[productId]) {
+      clearTimeout(debounceTimeouts.current[productId]);
+      delete debounceTimeouts.current[productId];
+    }
+
     dispatch(removeFromCart(productId));
     Swal.fire({
       toast: true,
@@ -61,6 +104,8 @@ const CartPageClient = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
+        Object.values(debounceTimeouts.current).forEach(clearTimeout);
+        debounceTimeouts.current = {};
         dispatch(clearFullCart());
       }
     });
@@ -71,6 +116,14 @@ const CartPageClient = () => {
     dispatch(setCheckoutItems({ items, source: "cart" }));
     router.push("/checkout");
   };
+
+  if (!isMounted || loading) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-20 text-center text-gray-500 font-medium">
+        Loading your cart items...
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -89,7 +142,6 @@ const CartPageClient = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl text-emerald-800 font-bold">
           Your Cart{" "}
@@ -105,97 +157,22 @@ const CartPageClient = () => {
         </button>
       </div>
 
-      {/* Items */}
       <ul className="space-y-4">
         {items.map((item) => (
-          <li
+          <CartItem
             key={item._id}
-            className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100"
-          >
-            {/* Image */}
-            <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden">
-              <Image
-                src={item.images?.[0] || "/placeholder.png"}
-                alt={item.productName}
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-emerald-900 truncate">
-                {item.productName}
-              </p>
-            </div>
-
-            {/* Quantity controls */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleQtyChange(item._id, item.quantity - 1)}
-                disabled={item.quantity <= 1}
-                className="w-10 h-10 border rounded-lg hover:bg-green-400 disabled:opacity-20 disabled:cursor-not-allowed"
-              >
-                -
-              </button>
-              <span className="w-6 text-center font-medium">
-                {item.quantity}
-              </span>
-              <button
-                onClick={() => handleQtyChange(item._id, item.quantity + 1)}
-                disabled={item.quantity >= item.stock}
-                className="w-10 h-10 border rounded-lg hover:bg-green-400 disabled:opacity-20 disabled:cursor-not-allowed "
-              >
-                +
-              </button>
-            </div>
-
-            {/* Line total */}
-            <p className="w-24 text-right font-semibold text-gray-800">
-              TK{" "}
-              {((item.discountPrice || item.price) * item.quantity).toFixed(0)}
-            </p>
-
-            {/* Remove */}
-            <button
-              onClick={() => handleRemove(item._id)}
-              className="text-red-400 hover:text-red-600 transition-colors ml-2"
-            >
-              <FaTrashCan />
-            </button>
-          </li>
+            item={item}
+            onQtyChange={(id, qty) => handleQtyChange(id, qty)}
+            onRemove={(id) => handleRemove(id)}
+          />
         ))}
       </ul>
 
-      {/* Summary */}
-      <div className="mt-8 bg-white border border-gray-100 rounded-xl shadow-sm p-6">
-        <div className="flex justify-between text-sm text-gray-500 mb-2">
-          <span>Subtotal ({totalQty} items)</span>
-          <span>TK {total.toFixed(0)}</span>
-        </div>
-        <div className="flex justify-between text-sm text-gray-500 mb-4">
-          <span>Shipping</span>
-          <span className="text-green-600">Calculated at checkout</span>
-        </div>
-        <div className="flex justify-between text-lg font-bold text-gray-900 border-t pt-4">
-          <span>Total</span>
-          <span>TK {total.toFixed(0)}</span>
-        </div>
-
-        <button
-          onClick={handleProceedToCheckout}
-          className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors"
-        >
-          Proceed to Checkout
-        </button>
-
-        <Link
-          href="/products"
-          className="block text-center mt-3 text-sm text-gray-500 hover:text-green-600 transition-colors"
-        >
-          ← Continue Shopping
-        </Link>
-      </div>
+      <CartSummary
+        totalQty={totalQty}
+        total={total}
+        onCheckout={handleProceedToCheckout}
+      />
     </div>
   );
 };
