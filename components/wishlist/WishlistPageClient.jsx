@@ -2,9 +2,8 @@
 
 import { addToCart, cartItems } from "@/store/cartSlice";
 import { toggleFav, wishlistItems } from "@/store/wishlistSlice";
-import Image from "next/image";
 import Link from "next/link";
-import { FaHeart, FaTrashAlt, FaShoppingCart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import WishlistCard from "./WishlistCard";
 
