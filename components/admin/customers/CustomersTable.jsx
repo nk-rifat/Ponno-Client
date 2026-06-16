@@ -36,6 +36,7 @@ const CustomersTable = () => {
       if (status !== "all") params.status = status;
 
       const { users, total, totalPages } = await getCustomers(params);
+
       setCustomers(users);
       setTotal(total);
       setTotalPages(totalPages);
@@ -59,11 +60,10 @@ const CustomersTable = () => {
     return () => clearTimeout(delay);
   }, [fetchCustomers]);
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-medium text-white">Customers</h1>
-        <span className="text-sm text-slate-400">{total} total</span>
-      </div>
+    <div className="space-y-6 max-w-7xl mx-auto ">
+      <h1 className="text-2xl font-medium text-white">
+        Customers <span>({total})</span>
+      </h1>
 
       {/* Filters */}
 
@@ -74,12 +74,10 @@ const CustomersTable = () => {
         <Table>
           <TableHeader className="text-base">
             <TableRow className="border-slate-800 hover:bg-transparent">
-              <TableHead className="text-slate-400">Customer</TableHead>
-              <TableHead className="text-slate-400">Status</TableHead>
-              <TableHead className="text-slate-400 hidden lg:table-cell">
-                Joined
-              </TableHead>
-              <TableHead className="text-slate-400 text-right">
+              <TableHead className="text-white w-[40%]">Customer</TableHead>
+              <TableHead className="text-white w-[20%]">Status</TableHead>
+              <TableHead className="text-white hidden md:table-cell w-[20%]">Joined</TableHead>
+              <TableHead className="text-white w-auto text-right">
                 Actions
               </TableHead>
             </TableRow>

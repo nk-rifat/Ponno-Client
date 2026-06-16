@@ -11,7 +11,7 @@ const CustomersRow = ({ customer, onRefresh }) => {
       <TableCell>
         <div>
           {customer.profilePic ? (
-            <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-gray-200 hover:ring-gray-00 transition-all duration-200">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden">
               <Image
                 src={customer.profilePic}
                 alt="Profile"
@@ -45,7 +45,7 @@ const CustomersRow = ({ customer, onRefresh }) => {
         )}
       </TableCell>
 
-      <TableCell className="text-slate-400 text-sm hidden lg:table-cell">
+      <TableCell className="text-slate-400 text-sm hidden md:table-cell">
         {new Date(customer.createdAt).toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",

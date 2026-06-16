@@ -28,12 +28,12 @@ const CustomersFilters = () => {
     router.push(`/admin/dashboard/customers?${params.toString()}`);
   };
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex items-center justify-between gap-3">
       <Input
         placeholder="Search name or email..."
         value={search}
         onChange={(e) => updateParams("search", e.target.value)}
-        className="w-64 bg-slate-800 border-slate-700 text-white placeholder:text-slate-400"
+        className="w-64 bg-slate-800 border-green-200 text-white placeholder:text-slate-400"
       />
 
       <Select

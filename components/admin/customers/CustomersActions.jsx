@@ -86,14 +86,14 @@ const CustomersActions = ({ customer, onRefresh }) => {
   };
   return (
     <div className="flex items-center justify-end gap-2">
-      <Button
+      {/* <Button
         size="icon"
         variant="ghost"
         className="h-8 w-8 text-slate-400 hover:text-white hover:bg-slate-700"
         title="View"
       >
         <FaEye className="text-sm" />
-      </Button>
+      </Button> */}
 
       <Button
         size="icon"
