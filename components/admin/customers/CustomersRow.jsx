@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { getInitials } from "@/utils/getInitials";
 import Image from "next/image";
@@ -9,7 +10,7 @@ const CustomersRow = ({ customer, onRefresh }) => {
       <TableCell>
         <div>
           {customer.profilePic ? (
-            <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-gray-200 hover:ring-gray-400 transition-all duration-200">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-gray-200 hover:ring-gray-400 transition-all duration-200">
               <Image
                 src={customer.profilePic}
                 alt="Profile"
@@ -18,11 +19,37 @@ const CustomersRow = ({ customer, onRefresh }) => {
               />
             </div>
           ) : (
-            <div className="bg-emerald-800 flex items-center justify-center text-white font-bold text-base w-10 h-10 rounded-full hover:bg-emerald-700">
+            <div className="bg-emerald-800 flex items-center justify-center text-white font-bold text-base w-9 h-9 rounded-full hover:bg-emerald-700">
               {getInitials(fullName)}
             </div>
           )}
+
+          <div>
+            <p className="font-medium text-white text-sm">{fullName}</p>
+            <p className="text-xs text-slate-400">{customer.email}</p>
+          </div>
         </div>
+      </TableCell>
+      <TableCell>
+        {customer.isBlocked ? (
+          <Badge variant="destructive">Blocked</Badge>
+        ) : customer.isVerified ? (
+          <Badge className="bg-green-900 text-green-300 hover:bg-green-900">
+            Verified
+          </Badge>
+        ) : (
+          <Badge className="bg-yellow-900 text-yellow-300 hover:bg-yellow-900">
+            Unverified
+          </Badge>
+        )}
+      </TableCell>
+
+      <TableCell className="text-slate-400 text-sm">
+        {new Date(customer.createdAt).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })}
       </TableCell>
     </TableRow>
   );
