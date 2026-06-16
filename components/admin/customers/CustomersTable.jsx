@@ -1,8 +1,18 @@
 "use client";
+import Pagination from "@/components/shared/Pagination";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { getCustomers } from "@/lib/api/customers";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import CustomersRow from "./CustomersRow";
 
 const LIMIT = 10;
 
@@ -12,7 +22,7 @@ const CustomersTable = () => {
 
   const [customers, setCustomers] = useState([]);
   const [total, setTotal] = useState(0);
-  const [totalPage, setTotalPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
   const [loading, setLoading] = useState(true);
@@ -27,7 +37,7 @@ const CustomersTable = () => {
       const { users, total, totalPages } = await getCustomers(params);
       setCustomers(users);
       setTotal(total);
-      setTotalPage(totalPages);
+      setTotalPages(totalPages);
     } catch {
       Swal.fire({
         toast: true,
@@ -47,7 +57,69 @@ const CustomersTable = () => {
 
     return () => clearTimeout(delay);
   }, [fetchCustomers]);
-  return <div>customer table</div>;
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-medium text-white">Customers</h1>
+        <span className="text-sm text-slate-400">{total} total</span>
+      </div>
+
+      {/* Filters */}
+
+      {/* Table */}
+
+      <div className="rounded-xl border border-slate-800 overflow-hidden">
+        <Table>
+          <TableHeader>
+            <TableRow className="border-slate-800 hover:bg-transparent">
+              <TableHead className="text-slate-400">Customer</TableHead>
+              <TableHead className="text-slate-400">Status</TableHead>
+              <TableHead className="text-slate-400">Joined</TableHead>
+              <TableHead className="text-slate-400">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {loading ? (
+              <TableRow>
+                <TableCell
+                  colSpan={4}
+                  className="text-center text-slate-400 py-10"
+                >
+                  Loading...
+                </TableCell>
+              </TableRow>
+            ) : customers.length === 0 ? (
+              <TableRow>
+                <TableCell
+                  colSpan={4}
+                  className="text-center text-slate-400 py-10"
+                >
+                  No customers found
+                </TableCell>
+              </TableRow>
+            ) : (
+              customers.map((customer) => (
+                <CustomersRow
+                  key={customer._id}
+                  customer={customer}
+                  onRefresh={fetchCustomers}
+                />
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <Pagination
+          totalPages={totalPages}
+          basePath="/admin/dashboard/customers"
+        />
+      )}
+    </div>
+  );
 };
 
 export default CustomersTable;

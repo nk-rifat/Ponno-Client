@@ -13,6 +13,7 @@ import { CategoryLinks } from "./CategoryLinks";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { getInitials } from "@/utils/getInitials";
 
 export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
   const { user, logout } = useAuth();
@@ -21,17 +22,6 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
     "flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-green-100 transition-colors";
 
   const fullName = `${user?.firstName} ${user?.lastName}`;
-
-  const getInitial = (name) => {
-    return name
-      ? name
-          .trim()
-          .split(" ")
-          .slice(0, 2)
-          .map((n) => n.charAt(0).toUpperCase())
-          .join("")
-      : "??";
-  };
 
   const closeUserMenu = () => {
     setUserOpen(false);
@@ -116,7 +106,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
                 </div>
               ) : (
                 <div className="w-full h-full bg-emerald-800 flex items-center justify-center text-white font-bold text-base px-2 py-1.5 rounded-full  hover:bg-emerald-700 ">
-                  {getInitial(fullName)}
+                  {getInitials(fullName)}
                 </div>
               )}
             </button>
