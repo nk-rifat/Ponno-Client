@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { blockCustomer } from "@/lib/api/customers";
+import { blockCustomer, deleteCustomer } from "@/lib/api/customers";
 import { FaBan, FaEye, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -44,6 +44,46 @@ const CustomersActions = ({ customer, onRefresh }) => {
       });
     }
   };
+
+  const handleDelete = async () => {
+    const result = await Swal.fire({
+      title: "Delete this customer?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, delete",
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await deleteCustomer(customer._id);
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title: "Customer deleted",
+        showConfirmButton: false,
+        timer: 1500,
+        background: "#ffffff",
+        color: "#18181b",
+      });
+      onRefresh();
+    } catch {
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "error",
+        title: "Delete failed",
+        showConfirmButton: false,
+        timer: 1500,
+        background: "#ffffff",
+        color: "#18181b",
+      });
+    }
+  };
   return (
     <div className="flex items-center justify-end gap-2">
       <Button
@@ -70,6 +110,7 @@ const CustomersActions = ({ customer, onRefresh }) => {
         variant="ghost"
         className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-slate-700"
         title="Delete"
+        onClick={handleDelete}
       >
         <FaTrash className="text-sm" />
       </Button>
