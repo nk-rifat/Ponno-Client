@@ -45,7 +45,7 @@ const CustomersRow = ({ customer, onRefresh }) => {
         )}
       </TableCell>
 
-      <TableCell className="text-slate-400 text-sm">
+      <TableCell className="text-slate-400 text-sm hidden lg:table-cell">
         {new Date(customer.createdAt).toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",

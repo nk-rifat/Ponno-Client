@@ -13,18 +13,19 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import CustomersRow from "./CustomersRow";
+import CustomersFilters from "./CustomersFilters";
 
 const LIMIT = 10;
 
 const CustomersTable = () => {
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page") || 1);
+  const search = searchParams.get("search") || "";
+  const status = searchParams.get("status") || "";
 
   const [customers, setCustomers] = useState([]);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("all");
   const [loading, setLoading] = useState(true);
 
   const fetchCustomers = useCallback(async () => {
@@ -66,15 +67,21 @@ const CustomersTable = () => {
 
       {/* Filters */}
 
+      <CustomersFilters />
+
       {/* Table */}
       <div className="rounded-xl border border-slate-800 overflow-hidden">
         <Table>
-          <TableHeader>
+          <TableHeader className="text-base">
             <TableRow className="border-slate-800 hover:bg-transparent">
               <TableHead className="text-slate-400">Customer</TableHead>
               <TableHead className="text-slate-400">Status</TableHead>
-              <TableHead className="text-slate-400">Joined</TableHead>
-              <TableHead className="text-slate-400">Actions</TableHead>
+              <TableHead className="text-slate-400 hidden lg:table-cell">
+                Joined
+              </TableHead>
+              <TableHead className="text-slate-400 text-right">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
 
