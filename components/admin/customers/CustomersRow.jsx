@@ -2,15 +2,16 @@ import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { getInitials } from "@/utils/getInitials";
 import Image from "next/image";
+import CustomersActions from "./CustomersActions";
 
 const CustomersRow = ({ customer, onRefresh }) => {
   const fullName = `${customer?.firstName} ${customer?.lastName}`;
   return (
-    <TableRow>
+    <TableRow className="border-slate-800 hover:bg-slate-800/50">
       <TableCell>
         <div>
           {customer.profilePic ? (
-            <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-gray-200 hover:ring-gray-400 transition-all duration-200">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-gray-200 hover:ring-gray-00 transition-all duration-200">
               <Image
                 src={customer.profilePic}
                 alt="Profile"
@@ -50,6 +51,9 @@ const CustomersRow = ({ customer, onRefresh }) => {
           month: "short",
           year: "numeric",
         })}
+      </TableCell>
+      <TableCell className="text-right">
+        <CustomersActions customer={customer} onRefresh={onRefresh} />
       </TableCell>
     </TableRow>
   );

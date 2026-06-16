@@ -67,7 +67,6 @@ const CustomersTable = () => {
       {/* Filters */}
 
       {/* Table */}
-
       <div className="rounded-xl border border-slate-800 overflow-hidden">
         <Table>
           <TableHeader>
