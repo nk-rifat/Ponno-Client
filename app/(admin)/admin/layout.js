@@ -15,7 +15,7 @@ export default function AdminLayout({ children }) {
         <AdminMobileHeader />
 
         {/* Page content */}
-        <main className="flex-1 p-6 bg-slate-900 min-h-screen">{children}</main>
+        <main className="flex-1 p-2 bg-slate-900 min-h-screen">{children}</main>
       </div>
     </div>
   );
