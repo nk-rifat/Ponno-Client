@@ -1,9 +1,12 @@
+"use client";
 import Link from "next/link";
 import ProductFilters from "./ProductFilters";
 import ProductGrid from "./ProductGrid";
 import { FaPlus } from "react-icons/fa";
+import ProductCardSkeleton from "./ProductCardSkeleton";
+import { Suspense } from "react";
 
-const ManageProductsClient = ({ searchParams }) => {
+const ManageProductsClient = () => {
   return (
     <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4 py-4">
       {/* Breadcrumb */}
@@ -27,7 +30,7 @@ const ManageProductsClient = ({ searchParams }) => {
           <h1 className="text-2xl font-bold md:text-3xl text-white">
             Manage Products
           </h1>
-          <p className="text-gray-400 dark:text-gray-400 mt-1">
+          <p className="text-gray-400 mt-1">
             Manage your product listings and inventory
           </p>
         </div>
@@ -41,10 +44,10 @@ const ManageProductsClient = ({ searchParams }) => {
       </div>
 
       {/* Filters */}
-      <ProductFilters searchParams={searchParams} />
+      <ProductFilters />
 
       {/* Grid */}
-      <ProductGrid searchParams={searchParams} />
+      <ProductGrid />
     </div>
   );
 };

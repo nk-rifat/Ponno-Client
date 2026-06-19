@@ -2,10 +2,8 @@ import ManageProductsClient from "@/components/admin/products/ManageProductsClie
 
 export const metadata = { title: "Manage Products – Ponno Admin" };
 
-const ManageProductPage = async ({ searchParams }) => {
-  const params = await searchParams;
-
-  return <ManageProductsClient searchParams={params} />;
+const ManageProductPage = () => {
+  return <ManageProductsClient />;
 };
 
 export default ManageProductPage;
