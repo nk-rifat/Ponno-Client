@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import axiosInstance from "@/lib/axiosInstance";
 import { getStatusBadge } from "./_utils/productHelpers";
+import { deleteProduct } from "@/lib/api/admin-products";
 
 const ProductCard = ({ product }) => {
   const [deleted, setDeleted] = useState(false);
@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
 
     setDeleting(true);
     try {
-      await axiosInstance.delete(`/admin/products/${product._id}`);
+      await deleteProduct(product._id);
       Swal.fire("Deleted!", "Product removed successfully.", "success");
       setDeleted(true);
     } catch {
@@ -95,7 +95,7 @@ const ProductCard = ({ product }) => {
               href={`/products/${product._id}`}
               className="px-4 py-2 border border-white text-white hover:bg-slate-700 rounded-lg transition flex items-center justify-center"
             >
-              <FaEye/>
+              <FaEye />
             </Link>
             <button
               onClick={handleDelete}
