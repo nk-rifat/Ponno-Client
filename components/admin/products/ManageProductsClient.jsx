@@ -3,8 +3,6 @@ import Link from "next/link";
 import ProductFilters from "./ProductFilters";
 import ProductGrid from "./ProductGrid";
 import { FaPlus } from "react-icons/fa";
-import ProductCardSkeleton from "./ProductCardSkeleton";
-import { Suspense } from "react";
 
 const ManageProductsClient = () => {
   return (
@@ -35,7 +33,7 @@ const ManageProductsClient = () => {
           </p>
         </div>
         <Link
-          href="/admin/products/create"
+          href="/admin/dashboard/products/create"
           className="mt-4 sm:mt-0 inline-flex items-center gap-2 px-3 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-white rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-lg"
         >
           <FaPlus className="text-sm" />

@@ -2,8 +2,6 @@
 
 import RouteError from "@/components/shared/RouteError";
 
-
-
 export default function ManageProductError({ error, reset }) {
   return (
     <RouteError

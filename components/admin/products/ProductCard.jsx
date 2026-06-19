@@ -93,7 +93,6 @@ const ProductCard = ({ product }) => {
             </Link>
             <Link
               href={`/products/${product._id}`}
-              target="_blank"
               className="px-4 py-2 border border-white text-white hover:bg-slate-700 rounded-lg transition flex items-center justify-center"
             >
               <FaEye/>
