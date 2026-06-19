@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa6";
 const STEPS = [
   { key: "pending", label: "Order Placed" },
   { key: "confirmed", label: "Confirmed" },
+  { key: "processing", label: "processing" },
   { key: "shipped", label: "Shipped" },
   { key: "delivered", label: "Delivered" },
 ];
@@ -93,6 +94,12 @@ export default function OrderStatusFlow({ status, statusHistory = [] }) {
           <span className="text-xs bg-green-50 text-green-600 px-3 py-1.5 rounded-md border border-green-100 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
             Order confirmed — processing begins
+          </span>
+        )}
+        {status === "processing" && (
+          <span className="text-xs bg-green-50 text-green-600 px-3 py-1.5 rounded-md border border-green-100 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+            Preparing your items
           </span>
         )}
         {status === "shipped" && (
