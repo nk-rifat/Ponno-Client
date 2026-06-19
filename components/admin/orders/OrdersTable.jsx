@@ -77,7 +77,7 @@ const OrdersTable = () => {
               <TableHead className="px-4 py-3 text-green-500 text-xs font-medium uppercase h-auto">
                 Status
               </TableHead>
-              <TableHead className="px-4 py-3 text-green-500 text-xs font-medium uppercase h-auto text-right">
+              <TableHead className="px-4 py-3 text-green-500 text-xs font-medium uppercase h-auto text-center">
                 Actions
               </TableHead>
             </TableRow>

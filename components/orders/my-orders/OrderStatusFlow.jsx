@@ -85,26 +85,26 @@ export default function OrderStatusFlow({ status, statusHistory = [] }) {
       {/* Lower Part: Dynamic Status Badges */}
       <div className="mt-5 flex flex-wrap gap-2">
         {status === "pending" && (
-          <span className="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-md border border-blue-100 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-md border border-amber-200 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             Waiting for admin review
           </span>
         )}
         {status === "confirmed" && (
-          <span className="text-xs bg-green-50 text-green-600 px-3 py-1.5 rounded-md border border-green-100 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+          <span className="text-xs bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-md border border-indigo-100 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
             Order confirmed — processing begins
           </span>
         )}
         {status === "processing" && (
-          <span className="text-xs bg-green-50 text-green-600 px-3 py-1.5 rounded-md border border-green-100 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+          <span className="text-xs bg-sky-50 text-sky-600 px-3 py-1.5 rounded-md border border-sky-100 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
             Preparing your items
           </span>
         )}
         {status === "shipped" && (
-          <span className="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-md border border-blue-100 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="text-xs bg-orange-50 text-orange-600 px-3 py-1.5 rounded-md border border-orange-100 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full border-orange-500" />
             Your order is on the way
           </span>
         )}
