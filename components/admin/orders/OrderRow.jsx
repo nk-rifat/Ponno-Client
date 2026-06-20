@@ -1,72 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import Swal from "sweetalert2";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaSpinner } from "react-icons/fa";
-import { changeOrderStatus, cancelAdminOrder } from "@/lib/api/admin-orders";
+import { changeOrderStatus } from "@/lib/api/admin-orders";
 import { TableCell, TableRow } from "@/components/ui/table";
-import {
-  getStatusBadgeStyle,
-  getNextStatus,
-  canCancel,
-} from "./_utils/orderHelpers";
+import { getStatusBadgeStyle, canCancel } from "./_utils/orderHelpers";
+import { useOrderStatusActions } from "@/hooks/useOrderStatusActions";
 import Link from "next/link";
 
 const OrderRow = ({ order, onUpdated }) => {
-  const [updating, setUpdating] = useState(false);
+  const { nextStatus, updating, handleChangeStatus, handleCancel } =
+    useOrderStatusActions(order, onUpdated);
 
-  const nextStatus = getNextStatus(order.status);
   const itemsCount = order.items.reduce((sum, item) => sum + item.quantity, 0);
-
-  const handleAdvance = async () => {
-    const result = await Swal.fire({
-      title: `Mark as ${nextStatus}?`,
-      text: `Order will move from "${order.status}" to "${nextStatus}".`,
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#16a34a",
-      confirmButtonText: "Yes, update",
-    });
-
-    if (!result.isConfirmed) return;
-
-    setUpdating(true);
-    try {
-      const data = await changeOrderStatus(order._id);
-      Swal.fire("Updated!", `Order is now ${data.order.status}.`, "success");
-      onUpdated(data.order);
-    } catch {
-      Swal.fire("Error", "Could not update order status.", "error");
-    } finally {
-      setUpdating(false);
-    }
-  };
-
-  const handleCancel = async () => {
-    const result = await Swal.fire({
-      title: "Cancel this order?",
-      text: "This action cannot be undone.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#dc2626",
-      confirmButtonText: "Yes, cancel",
-    });
-
-    if (!result.isConfirmed) return;
-
-    setUpdating(true);
-    try {
-      const data = await cancelAdminOrder(order._id);
-      Swal.fire("Cancelled", "Order has been cancelled.", "success");
-      onUpdated(data.order);
-    } catch {
-      Swal.fire("Error", "Could not cancel order.", "error");
-    } finally {
-      setUpdating(false);
-    }
-  };
 
   return (
     <TableRow className="border-b border-slate-700 hover:bg-slate-800/50 transition">
@@ -122,7 +70,7 @@ const OrderRow = ({ order, onUpdated }) => {
           {nextStatus && (
             <Button
               size="sm"
-              onClick={handleAdvance}
+              onClick={handleChangeStatus}
               disabled={updating}
               className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs w-full sm:w-auto justify-center"
             >

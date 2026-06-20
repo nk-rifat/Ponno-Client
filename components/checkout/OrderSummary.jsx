@@ -1,5 +1,7 @@
 "use client";
 
+import PriceBreakdown from "../shared/PriceBreakdown";
+
 const OrderSummary = ({
   items,
   watchedDistrictName,
@@ -8,7 +10,11 @@ const OrderSummary = ({
   total,
   register,
 }) => {
-
+  const deliveryNote = watchedDistrictName
+    ? watchedDistrictName === "Dhaka"
+      ? "✓ Dhaka city rate applied (Tk 120)"
+      : "✓ Outside Dhaka rate applied (Tk 150)"
+    : null;
   return (
     <div className="space-y-5">
       {/* Section Header */}
@@ -45,37 +51,13 @@ const OrderSummary = ({
         ))}
 
         {/* Pricing Breakdown */}
-        <div className="p-4 space-y-2.5 bg-slate-50/30">
-          <div className="flex justify-between text-sm text-slate-600">
-            <span>Subtotal</span>
-            <span className="font-medium text-slate-800">
-              Tk {subtotal.toLocaleString()}
-            </span>
-          </div>
-
-          <div className="flex justify-between text-sm text-slate-600">
-            <span>Delivery charge</span>
-            <span className="font-medium text-slate-800">
-              {watchedDistrictName ? `Tk ${deliveryCharge}` : "—"}
-            </span>
-          </div>
-
-          {/* Contextual Badge Info */}
-          {watchedDistrictName && (
-            <div className="inline-block rounded-md bg-emerald-50 px-2 py-1 text-[11px] font-medium text-emerald-700 mt-0.5">
-              {watchedDistrictName === "Dhaka"
-                ? "✓ Dhaka city rate applied (Tk 120)"
-                : "✓ Outside Dhaka rate applied (Tk 150)"}
-            </div>
-          )}
-
-          {/* Grand Total */}
-          <div className="flex justify-between text-base font-bold text-slate-900 pt-3 border-t border-slate-200/60">
-            <span className="text-indigo-600">Total</span>
-            <span className="text-indigo-600">
-              Tk {(watchedDistrictName ? total : subtotal).toLocaleString()}
-            </span>
-          </div>
+        <div className="p-4 bg-slate-50/30">
+          <PriceBreakdown
+            subtotal={subtotal}
+            deliveryCharge={watchedDistrictName ? deliveryCharge : null}
+            total={watchedDistrictName ? total : subtotal}
+            deliveryNote={deliveryNote}
+          />
         </div>
       </div>
 
