@@ -12,6 +12,7 @@ import {
   getNextStatus,
   canCancel,
 } from "./_utils/orderHelpers";
+import Link from "next/link";
 
 const OrderRow = ({ order, onUpdated }) => {
   const [updating, setUpdating] = useState(false);
@@ -70,7 +71,12 @@ const OrderRow = ({ order, onUpdated }) => {
   return (
     <TableRow className="border-b border-slate-700 hover:bg-slate-800/50 transition">
       <TableCell className="px-4 py-4 text-sm text-gray-300 font-mono border-none hidden md:table-cell">
-        {order._id.slice(-8)}
+        <Link
+          href={`/admin/dashboard/orders/${order._id}`}
+          className="text-emerald-400 hover:underline"
+        >
+          {order._id.slice(-8)}
+        </Link>
       </TableCell>
       <TableCell className="px-4 py-4 border-none">
         <div className="space-y-1">
@@ -78,16 +84,23 @@ const OrderRow = ({ order, onUpdated }) => {
           <span className="inline-block md:hidden px-1.5 py-0.5 bg-slate-700 text-gray-300 rounded font-mono text-[10px] uppercase tracking-wider mb-1">
             ID: #{order._id.slice(-8)}
           </span>
-          <p className="text-white text-sm font-medium">{order.delivery.name}</p>
+          <Link
+            href={`/admin/dashboard/orders/${order._id}`}
+            className="text-white text-sm font-medium hover:text-emerald-400 hover:underline block"
+          >
+            {order.delivery.name}
+          </Link>
           <p className="text-gray-500 text-xs">{order.delivery.phone}</p>
-          
+
           {/* Mobile-only Summary Data Block */}
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pt-1 text-xs md:hidden">
             <span className="text-gray-400">
               {itemsCount} item{itemsCount > 1 ? "s" : ""}
             </span>
             <span className="text-slate-600">•</span>
-            <span className="text-emerald-400 font-medium">Tk {order.total}</span>
+            <span className="text-emerald-400 font-medium">
+              Tk {order.total}
+            </span>
           </div>
         </div>
       </TableCell>
