@@ -12,7 +12,7 @@ const ProductGallery = ({ images = [] }) => {
   return (
     <div className="space-y-4">
       {/* Main Image */}
-      <div className="relative w-full h-100 overflow-hidden">
+      <div className="relative w-full h-96 md:h-100 overflow-hidden">
         <Image
           src={activeImage}
           alt="Product image"

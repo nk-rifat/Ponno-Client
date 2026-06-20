@@ -9,7 +9,7 @@ const ProductInfo = ({ product }) => {
   return (
     <div className="space-y-4">
       {/* Title */}
-      <h1 className="text-3xl font-bold text-emerald-700">
+      <h1 className="text-2xl md:text-3xl font-bold text-emerald-700">
         {productName}
       </h1>
 
@@ -22,8 +22,8 @@ const ProductInfo = ({ product }) => {
       </div>
 
       {/* Price */}
-      <div className="flex items-end gap-3">
-        <span className="text-3xl font-bold text-green-600">
+      <div className="flex items-end gap-2">
+        <span className="text-2xl md:text-3xl font-bold text-green-600">
           Tk {discountPrice || price}
         </span>
 
