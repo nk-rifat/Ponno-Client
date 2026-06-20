@@ -41,6 +41,7 @@ const ProductDetailsPage = async ({ params }) => {
           </div>
         </div>
       </div>
+      
       <RelatedProducts products={relatedProducts} />
     </>
   );
