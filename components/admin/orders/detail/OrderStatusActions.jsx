@@ -46,7 +46,7 @@ const OrderStatusActions = ({ order, onUpdated }) => {
             variant="outline"
             onClick={handleCancel}
             disabled={updating}
-            className="border-red-800 text-red-400 hover:bg-red-950"
+            className="border-red-300 text-red-400 hover:bg-red-500"
           >
             Cancel order
           </Button>
