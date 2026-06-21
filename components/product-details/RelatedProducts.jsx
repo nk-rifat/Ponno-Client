@@ -1,6 +1,6 @@
 import ProductCard from "../products/ProductCard";
 
-const RelatedProducts = async ({ products }) => {
+const RelatedProducts = ({ products }) => {
   return (
     <div className="max-w-7xl mx-auto mt-12">
       <h2 className="text-2xl md:3xl text-emerald-800 font-bold mb-6 mx-4">

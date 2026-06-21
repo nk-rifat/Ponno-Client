@@ -48,7 +48,9 @@ const ProductCard = ({ product }) => {
           {/* Rating (static for now) */}
           <div className="flex items-center text-yellow-400 mb-3">
             <FaStar className="text-sm" />
-            <span className="text-sm ml-1 text-gray-600">4.5</span>
+            <span className="text-sm ml-1 text-gray-600">
+              {product.totalReviews > 0 ? product.averageRating : "New"}
+            </span>
           </div>
         </div>
 

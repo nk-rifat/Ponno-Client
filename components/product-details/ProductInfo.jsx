@@ -3,8 +3,14 @@ import { FaStar } from "react-icons/fa";
 const ProductInfo = ({ product }) => {
   if (!product) return null;
 
-  const { productName, price, discountPrice, stock} =
-    product;
+  const {
+    productName,
+    price,
+    discountPrice,
+    stock,
+    averageRating = 0,
+    totalReviews = 0,
+  } = product;
 
   return (
     <div className="space-y-4">
@@ -14,12 +20,17 @@ const ProductInfo = ({ product }) => {
       </h1>
 
       {/* Rating */}
-      <div className="flex items-center gap-2 text-yellow-500">
-        <FaStar />
-        <span className="text-gray-700 font-medium">
-          {4.5}
-        </span>
-      </div>
+      {totalReviews > 0 ? (
+        <div className="flex items-center gap-2 text-yellow-500">
+          <FaStar />
+          <span className="text-gray-700 font-medium">{averageRating}</span>
+          <span className="text-gray-400 text-sm">
+            ({totalReviews} {totalReviews === 1 ? "review" : "reviews"})
+          </span>
+        </div>
+      ) : (
+        <p className="text-sm text-gray-400">No reviews yet</p>
+      )}
 
       {/* Price */}
       <div className="flex items-end gap-2">
@@ -28,9 +39,7 @@ const ProductInfo = ({ product }) => {
         </span>
 
         {discountPrice && (
-          <span className="text-gray-400 line-through">
-            Tk{price}
-          </span>
+          <span className="text-gray-400 line-through">Tk{price}</span>
         )}
       </div>
 
