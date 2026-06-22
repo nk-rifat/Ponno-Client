@@ -16,6 +16,7 @@ const ADMIN_RESTRICTED_ROUTES = [
   "/checkout",
   "/wishlist",
 ];
+const ADMIN_ROUTES = ["/admin"];
 
 // Pages that logged-in users shouldn't see
 // If a logged-in user visits these, redirect them to dashboard.
