@@ -42,6 +42,7 @@ const AuthProvider = ({ children }) => {
     });
 
     setUser(data.user);
+    document.cookie = `userRole=${data.user.role}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
     return data.user;
   };
 
@@ -51,6 +52,7 @@ const AuthProvider = ({ children }) => {
       await axiosInstance.post("/api/auth/logout");
     } finally {
       setUser(null);
+      document.cookie = "userRole=; path=/; max-age=0";
       dispatch(resetCart());
       dispatch(resetWishlist());
     }

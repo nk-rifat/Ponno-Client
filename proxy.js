@@ -10,7 +10,12 @@ const PROTECTED_ROUTES = [
   "/wishlist",
 ];
 const AUTH_ROUTES = ["/login", "/register", "/forgot-password"];
-const ADMIN_RESTRICTED_ROUTES = ["/orders/my-orders", "/cart", "/checkout", "/wishlist"];
+const ADMIN_RESTRICTED_ROUTES = [
+  "/orders/my-orders",
+  "/cart",
+  "/checkout",
+  "/wishlist",
+];
 
 // Pages that logged-in users shouldn't see
 // If a logged-in user visits these, redirect them to dashboard.
@@ -25,15 +30,15 @@ function matchesRoute(pathname, routes) {
 
 export function proxy(request) {
   const { pathname } = request.nextUrl;
-  const accessToken = request.cookies.get("accessToken")?.value;
   const userRole = request.cookies.get("userRole")?.value;
+  const isLoggedIn = !!userRole;
 
   const isProtected = matchesRoute(pathname, PROTECTED_ROUTES);
   const isAuthRoute = matchesRoute(pathname, AUTH_ROUTES);
   const isAdminRestricted = matchesRoute(pathname, ADMIN_RESTRICTED_ROUTES);
 
   // 1. Not logged in → trying to access a protected page → send to login
-  if (isProtected && !accessToken) {
+  if (isProtected && !isLoggedIn) {
     const loginUrl = new URL("/login", request.url);
     // Preserve where they were trying to go so we can redirect back after login
     loginUrl.searchParams.set("next", pathname);
@@ -41,7 +46,7 @@ export function proxy(request) {
   }
 
   // 2. Logged in → trying to access login/register → send to dashboard
-  if (isAuthRoute && accessToken) {
+  if (isAuthRoute && isLoggedIn) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
