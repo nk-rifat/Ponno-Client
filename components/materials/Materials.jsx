@@ -19,7 +19,7 @@ const Materials = () => {
                 <div
                   className={`lg:col-span-6 ${isReversed ? "lg:order-2" : "lg:order-1"}`}
                 >
-                  <div className="relative h-105 rounded-2xl overflow-hidden shadow-lg">
+                  <div className="relative h-80 md:h-105 rounded-2xl overflow-hidden shadow-lg">
                     <Image
                       src={item.image}
                       alt={item.name}

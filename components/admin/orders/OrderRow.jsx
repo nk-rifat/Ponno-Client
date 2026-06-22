@@ -24,7 +24,7 @@ const OrderRow = ({ order, onUpdated }) => {
           {order._id.slice(-8)}
         </Link>
       </TableCell>
-      <TableCell className="px-4 py-4 border-none">
+      <TableCell className="px-2 py-4 border-none">
         <div className="space-y-1">
           {/* Mobile-only Order ID Badge */}
           <span className="inline-block md:hidden px-1.5 py-0.5 bg-slate-700 text-gray-300 rounded font-mono text-[10px] uppercase tracking-wider mb-1">
@@ -70,15 +70,20 @@ const OrderRow = ({ order, onUpdated }) => {
               size="sm"
               onClick={handleChangeStatus}
               disabled={updating}
-              title={`Mark ${nextStatus}`}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs w-full sm:w-auto justify-center"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs w-full sm:w-auto justify-center h-auto py-1.5 sm:py-1 px-1.5"
             >
               {updating ? (
                 <FaSpinner className="animate-spin" />
               ) : (
-                <FaArrowRight className="mr-1 shrink-0" />
+                <FaArrowRight className="mr-1 shrink-0 text-[10px] sm:text-xs" />
               )}
-              <span className="truncate">Mark {nextStatus}</span>
+
+              <span className="flex flex-col items-center text-center sm:flex-row sm:gap-1 capitalize leading-tight">
+                <span>Mark</span>
+                <span className=" text-[10px] sm:text-xs">
+                  {nextStatus}
+                </span>
+              </span>
             </Button>
           )}
           {canCancel(order.status) && (
