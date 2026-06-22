@@ -7,6 +7,14 @@ const nextConfig = {
     imageSizes: [64, 128, 256, 384],
     minimumCacheTTL: 31536000,
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://ponno-server.onrender.com/api/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
