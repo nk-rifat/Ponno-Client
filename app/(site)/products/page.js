@@ -4,6 +4,11 @@ import SortSelect from "@/components/products/SortSelect";
 import Pagination from "@/components/shared/Pagination";
 import { categories } from "@/data/categories";
 import { getProducts } from "@/lib/api/products";
+export const metadata = {
+  title: "Products | Ponno",
+  description:
+    "Browse our full collection of handcrafted bamboo, cane, and jute products made by skilled artisans in Bangladesh.",
+};
 
 const ProductsPage = async ({ searchParams }) => {
   const params = await searchParams;

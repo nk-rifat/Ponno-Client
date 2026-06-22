@@ -6,9 +6,10 @@ const ProductFormFields = ({ register, errors }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="md:col-span-2">
         <Field
-          label="Product Name *"
+          label="Product Name"
           htmlFor="productName"
           error={errors.productName}
+          labelClassName="text-gray-400"
         >
           <input
             id="productName"
@@ -23,9 +24,10 @@ const ProductFormFields = ({ register, errors }) => {
 
       <div className="md:col-span-2">
         <Field
-          label="Description *"
+          label="Description"
           htmlFor="description"
           error={errors.description}
+          labelClassName="text-gray-400"
         >
           <textarea
             id="description"
@@ -39,7 +41,12 @@ const ProductFormFields = ({ register, errors }) => {
         </Field>
       </div>
 
-      <Field label="Price (Tk) *" htmlFor="price" error={errors.price}>
+      <Field
+        label="Price (Tk)"
+        labelClassName="text-gray-400"
+        htmlFor="price"
+        error={errors.price}
+      >
         <input
           id="price"
           type="number"
@@ -52,7 +59,11 @@ const ProductFormFields = ({ register, errors }) => {
         />
       </Field>
 
-      <Field label="Discount Price (Tk)" htmlFor="discountPrice">
+      <Field
+        label="Discount Price (Tk) "
+        htmlFor="discountPrice"
+        labelClassName="text-gray-400"
+      >
         <input
           id="discountPrice"
           type="number"
@@ -62,7 +73,12 @@ const ProductFormFields = ({ register, errors }) => {
         />
       </Field>
 
-      <Field label="Stock *" htmlFor="stock" error={errors.stock}>
+      <Field
+        label="Stock"
+        htmlFor="stock"
+        error={errors.stock}
+        labelClassName="text-gray-400"
+      >
         <input
           id="stock"
           type="number"
@@ -75,7 +91,12 @@ const ProductFormFields = ({ register, errors }) => {
         />
       </Field>
 
-      <Field label="Category *" htmlFor="category" error={errors.category}>
+      <Field
+        label="Category"
+        htmlFor="category"
+        error={errors.category}
+        labelClassName="text-gray-400"
+      >
         <select
           id="category"
           {...register("category", { required: "Category is required" })}
@@ -91,9 +112,10 @@ const ProductFormFields = ({ register, errors }) => {
       </Field>
 
       <Field
-        label="Sub Category *"
+        label="Sub Category"
         htmlFor="subCategory"
         error={errors.subCategory}
+        labelClassName="text-gray-400"
       >
         <input
           id="subCategory"
@@ -103,7 +125,12 @@ const ProductFormFields = ({ register, errors }) => {
         />
       </Field>
 
-      <Field label="Material *" htmlFor="material" error={errors.material}>
+      <Field
+        label="Material"
+        htmlFor="material"
+        error={errors.material}
+        labelClassName="text-gray-400"
+      >
         <input
           id="material"
           {...register("material", { required: "Material is required" })}
@@ -112,7 +139,7 @@ const ProductFormFields = ({ register, errors }) => {
         />
       </Field>
 
-      <Field label="Size" htmlFor="size">
+      <Field label="Size" htmlFor="size" labelClassName="text-gray-400">
         <input
           id="size"
           {...register("size")}
@@ -121,7 +148,7 @@ const ProductFormFields = ({ register, errors }) => {
         />
       </Field>
 
-      <Field label="Color" htmlFor="color">
+      <Field label="Color" htmlFor="color" labelClassName="text-gray-400">
         <input
           id="color"
           {...register("color")}
@@ -130,7 +157,7 @@ const ProductFormFields = ({ register, errors }) => {
         />
       </Field>
 
-      <Field label="Shape" htmlFor="shape">
+      <Field label="Shape" htmlFor="shape" labelClassName="text-gray-400">
         <input
           id="shape"
           {...register("shape")}

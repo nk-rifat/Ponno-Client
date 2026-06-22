@@ -1,4 +1,8 @@
 import { verifyEmail } from "@/lib/api/auth";
+export const metadata = {
+  title: "Verify Email | Ponno",
+  description: "Verify your email address to activate your Ponno account.",
+};
 
 export default async function VerifyEmailPage({ searchParams }) {
   const params = await searchParams;

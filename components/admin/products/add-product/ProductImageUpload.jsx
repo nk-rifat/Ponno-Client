@@ -28,8 +28,8 @@ const ProductImageUpload = ({
   return (
     <div>
       <label className="block text-sm font-medium text-gray-400 mb-2">
-        Product Images <span className="text-red-500">*</span>{" "}
-        <span className="text-gray-500 text-xs">(max {MAX_IMAGES})</span>
+        Product Images 
+        <span className="text-yellow-300 text-xs"> (max {MAX_IMAGES})</span>
       </label>
 
       <div className="flex flex-wrap gap-4">

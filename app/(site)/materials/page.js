@@ -1,4 +1,9 @@
 import Materials from "@/components/materials/Materials";
+export const metadata = {
+  title: "Materials | Ponno",
+  description:
+    "Discover the natural materials behind Ponno products — bamboo, cane, and jute sourced and crafted with purpose by skilled artisans in Bangladesh.",
+};
 
 const MaterialsPage = () => {
   return (
@@ -15,8 +20,8 @@ const MaterialsPage = () => {
           </h1>
         </div>
       </div>
-      
-    {/* Materials Grid */}
+
+      {/* Materials Grid */}
       <Materials />
     </>
   );

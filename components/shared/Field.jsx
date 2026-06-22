@@ -1,11 +1,14 @@
 import React from "react";
 
-const Field = ({ label, children, htmlFor, error }) => {
+const Field = ({ label, children, htmlFor, error, labelClassName }) => {
   const id = htmlFor || getChildId(children);
   return (
     <div className="mt-2">
       {label && (
-        <label htmlFor={id} className="text-emerald-800 font-semibold">
+        <label
+          htmlFor={id}
+          className={labelClassName || "text-emerald-800 font-semibold"}
+        >
           {label}
         </label>
       )}
