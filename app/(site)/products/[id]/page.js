@@ -18,16 +18,16 @@ const ProductDetailsPage = async ({ params }) => {
     <>
       <div className="max-w-7xl mx-auto px-4 pt-5 sm:pt-7 md:pt-10">
         {/* Breadcrumb */}
-        <nav className="text-base font-medium text-gray-500 flex items-center gap-2 pl-4">
+        <nav className="text-base font-medium text-gray-500 flex items-center gap-2 pl-2">
           <Link href="/" className="hover:text-green-600">
             Home
           </Link>
           <span>&gt;</span>
-          <Link href="/products" className="hover:text-green-600">
+          <Link href="/products" className="hover:text-green-600 whitespace-nowrap">
             Products
           </Link>
           <span>&gt;</span>
-          <span className="text-gray-800 font-semibold">
+          <span className="text-gray-800 font-semibold truncate min-w-0">
             {product.productName}
           </span>
         </nav>

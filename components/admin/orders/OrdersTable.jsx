@@ -57,9 +57,9 @@ const OrdersTable = () => {
   };
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
-      <div className="overflow-x-auto">
-        <Table>
+    <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden w-full">
+      <div className="w-full overflow-x-auto min-w-full inline-block align-middle">
+        <Table className="w-full table-fixed md:table-auto">
           <TableHeader className="border-b border-slate-700">
             <TableRow className="border-b border-slate-700 hover:bg-transparent">
               <TableHead className="px-4 py-3 text-xs font-medium uppercase h-auto text-green-500 hidden md:table-cell">

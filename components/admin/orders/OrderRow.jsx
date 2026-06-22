@@ -70,6 +70,7 @@ const OrderRow = ({ order, onUpdated }) => {
               size="sm"
               onClick={handleChangeStatus}
               disabled={updating}
+              title={`Mark ${nextStatus}`}
               className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs w-full sm:w-auto justify-center"
             >
               {updating ? (
