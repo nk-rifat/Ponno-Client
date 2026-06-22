@@ -1,25 +1,46 @@
 "use client";
 
-const STATUS_BADGE_COLORS = {
-  pending: "bg-yellow-100 text-yellow-800",
-  confirmed: "bg-blue-100 text-blue-800",
-  processing: "bg-indigo-100 text-indigo-800",
-  shipped: "bg-purple-100 text-purple-800",
-  delivered: "bg-green-100 text-green-800",
-  cancelled: "bg-red-100 text-red-800",
-};
-
 import Image from "next/image";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import OrderStatusFlow from "./OrderStatusFlow";
 import axiosInstance from "@/lib/axiosInstance";
+import { FaDownload } from "react-icons/fa";
 
 export default function OrderCard({ order, onCancelled }) {
   const [cancelling, setCancelling] = useState(false);
+  const [downloadingReceipt, setDownloadingReceipt] = useState(false);
 
   const canCancel = ["pending", "confirmed"].includes(order.status);
 
+  const handleDownloadReceipt = async () => {
+    try {
+      setDownloadingReceipt(true);
+      const res = await axiosInstance.get(`/api/orders/${order._id}/receipt`, {
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute(
+        "download",
+        `receipt-${order._id.slice(-8).toUpperCase()}.pdf`,
+      );
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to download receipt",
+        text: "Something went wrong. Please try again.",
+      });
+    } finally {
+      setDownloadingReceipt(false);
+    }
+  };
   const handleCancel = async () => {
     const result = await Swal.fire({
       title: "Cancel Order?",
@@ -78,9 +99,7 @@ export default function OrderCard({ order, onCancelled }) {
               {order.status}
             </p>
 
-            <p className="text-lg font-bold text-gray-900">
-              Tk {order.total}
-            </p>
+            <p className="text-lg font-bold text-gray-900">Tk {order.total}</p>
           </div>
         </div>
 
@@ -117,7 +136,16 @@ export default function OrderCard({ order, onCancelled }) {
         />
 
         {/* ACTIONS */}
-        <div className="border-t border-gray-200 pt-2 flex flex-wrap gap-3">
+        <div className="border-t border-gray-200 pt-4 flex flex-wrap gap-3">
+          <button
+            onClick={handleDownloadReceipt}
+            disabled={downloadingReceipt}
+            className="flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition disabled:opacity-50"
+          >
+            <FaDownload className="mr-2" />
+            {downloadingReceipt ? "Generating..." : "Download Receipt"}
+          </button>
+
           {canCancel && (
             <button
               onClick={handleCancel}
@@ -125,12 +153,6 @@ export default function OrderCard({ order, onCancelled }) {
               className="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition disabled:opacity-50"
             >
               {cancelling ? "Cancelling..." : "Cancel Order"}
-            </button>
-          )}
-
-          {order.status === "delivered" && (
-            <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">
-              Reorder
             </button>
           )}
         </div>

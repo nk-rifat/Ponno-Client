@@ -38,7 +38,7 @@ const Footer = () => {
               </Link>
 
               <Link
-                href="/about-us"
+                href="/about"
                 prefetch={false}
                 className="hover:text-green-600 transition"
               >

@@ -28,7 +28,6 @@ const DeliveryForm = ({
             </label>
             <input
               type="text"
-              readOnly
               placeholder="Your full name"
               {...register("name", { required: "Name is required" })}
               className={`w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none transition-colors
