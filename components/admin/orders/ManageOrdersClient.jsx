@@ -1,6 +1,5 @@
 "use client";
 
-import { Suspense } from "react";
 import OrdersFilters from "./OrdersFilters";
 import OrdersTable from "./OrdersTable";
 
@@ -16,14 +15,12 @@ const ManageOrdersClient = () => {
       </div>
 
       {/* Filters */}
-      <Suspense fallback={null}>
-        <OrdersFilters />
-      </Suspense>
+
+      <OrdersFilters />
 
       {/* Table */}
-      <Suspense fallback={null}>
-        <OrdersTable />
-      </Suspense>
+
+      <OrdersTable />
     </div>
   );
 };
