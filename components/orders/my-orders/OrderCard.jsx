@@ -140,7 +140,7 @@ export default function OrderCard({ order, onCancelled }) {
           <button
             onClick={handleDownloadReceipt}
             disabled={downloadingReceipt}
-            className="flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition disabled:opacity-50"
+            className="flex items-center px-2 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm md:text-base font-medium transition disabled:opacity-50"
           >
             <FaDownload className="mr-2" />
             {downloadingReceipt ? "Generating..." : "Download Receipt"}
@@ -150,7 +150,7 @@ export default function OrderCard({ order, onCancelled }) {
             <button
               onClick={handleCancel}
               disabled={cancelling}
-              className="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition disabled:opacity-50"
+              className="px-2 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition disabled:opacity-50"
             >
               {cancelling ? "Cancelling..." : "Cancel Order"}
             </button>

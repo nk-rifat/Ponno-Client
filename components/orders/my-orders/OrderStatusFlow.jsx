@@ -48,7 +48,7 @@ export default function OrderStatusFlow({ status, statusHistory = [] }) {
       <h4 className="font-medium text-gray-900 mb-3">Order Status</h4>
 
       {/* Upper Part: Horizontal Flow */}
-      <div className="flex items-center space-x-4 text-sm flex-wrap gap-y-3">
+      <div className="flex flex-col items-start gap-y-3 sm:flex-row sm:items-center sm:gap-y-0 sm:gap-x-4 text-sm w-full">
         {STEPS.map((step, i, arr) => {
           const isDone = i < currentIndex;
           const isCurrent = i === currentIndex;
@@ -72,9 +72,13 @@ export default function OrderStatusFlow({ status, statusHistory = [] }) {
               {/* Connecting Line */}
               {i < arr.length - 1 && (
                 <div
-                  className={`w-8 h-0.5 ml-4 ${
-                    isDone ? "bg-green-500" : "bg-gray-200"
-                  }`}
+                  className={`
+                    /* Mobile Vertical Track Settings */
+                    w-0.5 h-3 ml-1.75 my-1
+                    /* Desktop Horizontal Track Settings */
+                    sm:w-8 sm:h-0.5 sm:ml-4 sm:my-0
+                    ${isDone ? "bg-green-500" : "bg-gray-200"}
+                  `}
                 ></div>
               )}
             </div>
