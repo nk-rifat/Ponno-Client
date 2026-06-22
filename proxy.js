@@ -37,8 +37,21 @@ export function proxy(request) {
   const isProtected = matchesRoute(pathname, PROTECTED_ROUTES);
   const isAuthRoute = matchesRoute(pathname, AUTH_ROUTES);
   const isAdminRestricted = matchesRoute(pathname, ADMIN_RESTRICTED_ROUTES);
+  const isAdminRoute = matchesRoute(pathname, ADMIN_ROUTES);
 
-  // 1. Not logged in → trying to access a protected page → send to login
+  // Guest → admin route → send to login
+  if (isAdminRoute && !isLoggedIn) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("next", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Logged in non-admin → admin route → send to home
+  if (isAdminRoute && userRole !== "admin") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Not logged in → trying to access a protected page → send to login
   if (isProtected && !isLoggedIn) {
     const loginUrl = new URL("/login", request.url);
     // Preserve where they were trying to go so we can redirect back after login
@@ -46,17 +59,17 @@ export function proxy(request) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // 2. Logged in → trying to access login/register → send to dashboard
+  // Logged in → trying to access login/register → send to dashboard
   if (isAuthRoute && isLoggedIn) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // 4. Admin → trying to access user-only routes → send to dashboard
+  // Admin → trying to access user-only routes → send to dashboard
   if (isAdminRestricted && userRole === "admin") {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url));
   }
 
-  // 3. Everything else → let through
+  // Everything else → let through
   return NextResponse.next();
 }
 
