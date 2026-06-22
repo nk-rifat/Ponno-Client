@@ -1,5 +1,6 @@
-import { Suspense } from "react";
 import CustomersTable from "@/components/admin/customers/CustomersTable";
+import CustomersTableSkeleton from "@/components/admin/customers/CustomersTableSkeleton";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Customers | Ponno Admin",
@@ -7,7 +8,7 @@ export const metadata = {
 
 const CustomerPage = () => {
   return (
-    <Suspense fallback={<div className="text-slate-400">Loading...</div>}>
+    <Suspense fallback={<CustomersTableSkeleton />}>
       <CustomersTable />
     </Suspense>
   );

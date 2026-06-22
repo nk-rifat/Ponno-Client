@@ -1,7 +1,5 @@
 import LoadingScreen from "@/components/shared/LoadingScreen";
 
-
-
-export default function ManageCustomerLoading() {
-  return <LoadingScreen pageName="Manage Customer" />;
+export default function CustomersLoading() {
+  return <LoadingScreen pageName="Customers" />;
 }
