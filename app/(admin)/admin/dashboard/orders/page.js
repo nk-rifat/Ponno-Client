@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import ManageOrdersClient from "@/components/admin/orders/ManageOrdersClient";
 
 export const metadata = { title: "Manage Orders – Ponno Admin" };
