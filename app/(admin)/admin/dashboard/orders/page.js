@@ -1,10 +1,14 @@
-export const dynamic = "force-dynamic";
 import ManageOrdersClient from "@/components/admin/orders/ManageOrdersClient";
+import { Suspense } from "react";
 
 export const metadata = { title: "Manage Orders – Ponno Admin" };
 
 const ManageOrdersPage = () => {
-  return <ManageOrdersClient />;
+  return (
+    <Suspense fallback={null}>
+      <ManageOrdersClient />
+    </Suspense>
+  );
 };
 
 export default ManageOrdersPage;
