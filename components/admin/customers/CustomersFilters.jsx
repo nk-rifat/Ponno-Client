@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -15,7 +15,7 @@ const CustomersFilters = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const search = searchParams.get("search") || "";
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const status = searchParams.get("status") || "";
 
   const updateParams = (key, value) => {
@@ -34,12 +34,16 @@ const CustomersFilters = () => {
     updateParams("search", value);
   }, 400);
 
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    debouncedSearch(e.target.value);
+  };
   return (
     <div className="flex items-center justify-between gap-3">
       <Input
         placeholder="Search name or email..."
         value={search}
-        onChange={(e) => debouncedSearch(e.target.value)}
+        onChange={handleSearchChange}
         className="w-64 bg-slate-800 border-green-200 text-white placeholder:text-slate-400"
       />
 

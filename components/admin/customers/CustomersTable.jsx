@@ -14,6 +14,7 @@ import { useCallback, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import CustomersRow from "./CustomersRow";
 import CustomersFilters from "./CustomersFilters";
+import CustomersTableSkeleton from "./CustomersTableSkeleton";
 
 const LIMIT = 10;
 
@@ -59,6 +60,8 @@ const CustomersTable = () => {
 
     return () => clearTimeout(delay);
   }, [fetchCustomers]);
+
+  if (loading) return <CustomersTableSkeleton />;
   return (
     <div className="space-y-6 max-w-7xl mx-auto ">
       <h1 className="text-2xl font-medium text-white">
@@ -76,7 +79,9 @@ const CustomersTable = () => {
             <TableRow className="border-slate-800 hover:bg-transparent">
               <TableHead className="text-white w-[40%]">Customer</TableHead>
               <TableHead className="text-white w-[20%]">Status</TableHead>
-              <TableHead className="text-white hidden md:table-cell w-[20%]">Joined</TableHead>
+              <TableHead className="text-white hidden md:table-cell w-[20%]">
+                Joined
+              </TableHead>
               <TableHead className="text-white w-auto text-right">
                 Actions
               </TableHead>
@@ -84,16 +89,7 @@ const CustomersTable = () => {
           </TableHeader>
 
           <TableBody>
-            {loading ? (
-              <TableRow>
-                <TableCell
-                  colSpan={4}
-                  className="text-center text-slate-400 py-10"
-                >
-                  Loading...
-                </TableCell>
-              </TableRow>
-            ) : customers.length === 0 ? (
+            {customers.length === 0 ? (
               <TableRow>
                 <TableCell
                   colSpan={4}
