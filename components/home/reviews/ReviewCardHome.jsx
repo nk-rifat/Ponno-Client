@@ -35,7 +35,7 @@ const ReviewCardHome = ({ review }) => {
               {userId?.firstName || "Anonymous"}
             </p>
             {productId?.productName && (
-              <p className="text-xs text-gray-400 line-clamp-1">
+              <p className="text-xs text-gray-500 line-clamp-1">
                 on {productId.productName}
               </p>
             )}

@@ -11,11 +11,10 @@ export const Logo = () => {
       aria-label="Go to homepage"
     >
       <Image
-        src="/ponno.png"
+        src="/ponno.webp"
         alt="Ponno Logo"
         width={180}
         height={60}
-        priority
         className="h-10 sm:h-10 md:h-12 w-auto mt-1"
       />
 

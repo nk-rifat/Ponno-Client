@@ -8,7 +8,7 @@ export default function SiteLayout({ children }) {
       <Navbar />
 
       {/* Page Content Wrapper */}
-      <div className="mt-16 min-h-screen bg-white">{children}</div>
+      <main className="mt-16 min-h-screen bg-white">{children}</main>
 
       {/* Footer */}
       <Footer />

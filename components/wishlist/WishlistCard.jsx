@@ -14,7 +14,6 @@ const WishlistCard = ({ item, isInCart, onRemove, onAddToCart }) => {
               alt={item.productName}
               fill
               sizes="80px"
-              quality={75}
               className="object-cover"
             />
           </Link>

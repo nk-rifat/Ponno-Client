@@ -31,7 +31,6 @@ const CategoryGrid = () => {
                 priority={index < 2}
                 loading={index < 2 ? "eager" : "lazy"}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                quality={75}
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-stone-900/10 transition-opacity duration-500 group-hover:bg-stone-900/5" />
