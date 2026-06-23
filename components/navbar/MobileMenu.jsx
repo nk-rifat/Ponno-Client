@@ -34,10 +34,17 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
         <NavActions cartCount={2} />
 
         <button
+          aria-label={
+            menuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           className="text-lg p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors ml-1"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <FaTimes /> : <FaBars />}
+          {menuOpen ? (
+            <FaTimes aria-hidden="true" />
+          ) : (
+            <FaBars aria-hidden="true" />
+          )}
         </button>
       </div>
 

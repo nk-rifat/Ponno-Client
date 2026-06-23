@@ -19,8 +19,10 @@ export default function RootLayout({ children, modal }) {
       <body>
         <ReduxProvider>
           <AuthProvider>
-            {children}
-            {modal}
+            <main>
+              {children}
+              {modal}
+            </main>
           </AuthProvider>
         </ReduxProvider>
       </body>

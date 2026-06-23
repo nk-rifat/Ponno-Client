@@ -22,7 +22,7 @@ const FeaturedProducts = async () => {
         <Link
           href="/products"
           prefetch={false}
-          className="font-medium text-emerald-600 hover:text-emerald-800"
+          className="font-medium text-emerald-700 hover:text-emerald-800"
         >
           View All Products →
         </Link>

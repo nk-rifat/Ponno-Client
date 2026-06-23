@@ -72,7 +72,7 @@ const AddToCartButton = ({ product, quantity = 1, className = "" }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className={`relative overflow-hidden bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-300 group/btn ${className}`}
+      className={`relative overflow-hidden bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg transition-all duration-300 group/btn ${className}`}
     >
       <span className="flex items-center justify-center transition-all duration-300 group-hover/btn:-translate-y-8 group-hover/btn:opacity-0">
         Add to Cart

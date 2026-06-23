@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => {
             </span>
 
             {discountPrice && (
-              <span className="text-sm text-gray-400 line-through ml-2">
+              <span className="text-sm text-gray-500 line-through ml-2">
                 TK {price}
               </span>
             )}
