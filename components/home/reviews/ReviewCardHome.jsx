@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaStar } from "react-icons/fa";
+import Image from "next/image";
 
 const ReviewCardHome = ({ review }) => {
   const { rating, comment, userId, productId } = review;
@@ -23,12 +23,21 @@ const ReviewCardHome = ({ review }) => {
         </p>
 
         <div className="flex items-center gap-3 mt-auto pt-3 border-t border-gray-100">
-          <Avatar className="h-9 w-9">
-            <AvatarImage src={userId?.profilePic} alt={userId?.firstName} />
-            <AvatarFallback className="bg-emerald-100 text-emerald-700 font-semibold text-sm">
-              {userId?.firstName?.[0]?.toUpperCase() || "U"}
-            </AvatarFallback>
-          </Avatar>
+          <div className="h-9 w-9 rounded-full overflow-hidden bg-emerald-100 shrink-0 relative">
+            {userId?.profilePic ? (
+              <Image
+                src={userId.profilePic}
+                alt={userId?.firstName || "User"}
+                fill
+                sizes="36px"
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-emerald-700 font-semibold text-sm">
+                {userId?.firstName?.[0]?.toUpperCase() || "U"}
+              </div>
+            )}
+          </div>
 
           <div>
             <p className="text-sm font-medium text-gray-800">

@@ -138,6 +138,7 @@ export const MobileMenu = ({ pathname, menuOpen, setMenuOpen, navLinks }) => {
             ) : (
               <Link
                 href="/login"
+                prefetch={false}
                 className="col-span-2 flex items-center justify-center gap-2 py-2.5 border border-green-300 text-gray-800 bg-white/8 rounded-xl text-sm font-medium hover:bg-green-50"
                 onClick={() => setMenuOpen(false)}
               >

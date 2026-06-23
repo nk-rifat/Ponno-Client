@@ -115,6 +115,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
               <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-xl py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                 <Link
                   href="/profile"
+                  prefetch={false}
                   className={menuItemClass}
                   onClick={closeUserMenu}
                 >
@@ -124,6 +125,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
                 {user.role === "admin" ? (
                   <Link
                     href="/admin/dashboard"
+                    prefetch={false}
                     className={menuItemClass}
                     onClick={closeUserMenu}
                   >
@@ -133,6 +135,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
                 ) : (
                   <Link
                     href="/orders/my-orders"
+                    prefetch={false}
                     className={menuItemClass}
                     onClick={closeUserMenu}
                   >
@@ -154,6 +157,7 @@ export const DesktopMenu = ({ pathname, userOpen, setUserOpen, navLinks }) => {
         ) : (
           <Link
             href="/login"
+            prefetch={false}
             className="flex items-center justify-center gap-2 py-2 px-5 border text-white bg-green-600 rounded-xl text-sm font-semibold"
           >
             Login
